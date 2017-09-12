@@ -1,0 +1,23 @@
+<template name="privateNavbar">
+    <nav class="blue-grey">
+        <div class="nav-wrapper container">
+            <a class="brand-logo center" href="/">Night Out</a>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="left hide-on-med-and-down">
+                <li><a href="/home">Your Events</a></li>
+                <li><a href="/friends">Friends</a></li>
+            </ul>
+            <ul class="right hide-on-med-and-down">
+                <li>Welcome, {{currentUser.username}}.</li>
+                <li><a href="#" class="logout">Log Out</a></li>
+            </ul>
+            <ul class="side-nav" id="nav-mobile">
+                <li><a href="/home">Your Events</a></li>
+                <li><a href="/friends">Friends</a></li>
+                <li><a href="/event/new" class="waves-effect waves-light btn blue-grey lighten-1">Create Event</a></li>
+                <li class="container black-text">Logged in as: {{currentUser.username}}.</li>
+                <li><li><a href="#" class="logout">Log Out</a></li></li>
+            </ul>
+        </div>
+    </nav>
+</template>

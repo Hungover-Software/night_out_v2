@@ -1,3 +1,33 @@
 <template name="login">
-    <p>login template</p>
+    <div class="row">
+        <div class="col s1 l2" style="content:''"></div>
+        <div class="col s12 m10 l8">
+            <h1 class="center">Sign In</h1>
+            
+            <form id="signin">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="email" name="email" class="validate" />
+                        <label for="email" data-error="Invalid Email">Email</label>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="password" name="password" class="validate" />
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col s6">
+                        <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Sign In</button>
+                    </div>
+                    <div class="col s6">
+                        <button id="signup" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Create Account</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </template>
