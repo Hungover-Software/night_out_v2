@@ -1,0 +1,64 @@
+    <!--
+    # Night Out event planning application
+    # Hungover Software
+    # University of Nebraska Omaha
+    # CSCI-4830-860 SU17
+    # Create Event view (event/new.html.erb)
+    # 
+    # Authors: Logan Fitzgibbons, Anup Thapa, Saujanya Mani 
+    !-->
+<template name="event_new"> 
+    <div class="container">
+        <h1 class="center">Create Event</h1>
+        <div class="row">
+            <form class="col s12" id="new">
+                <div class="input-field col s12">
+                    <input type="text" name="event_name" class="validate" />
+                    <label for="event_name" data-error="Invalid Email">Event Name</label>
+                </div>
+                
+                <div class="col s12 l6">
+                    <label for="event_date">Event Date</label>
+                    <input id="event_date" class="validate datepicker" />
+                </div>
+                <div class="col s12 l6">
+                    <label for="event_time">Event Time</label>
+                    <input id="event_time" class="validate timepicker">
+                </div>
+                <div>
+                <!-- Modal Trigger -->
+                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Invite Friends</a>
+            
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal modal-fixed-footer">
+                    <div class="modal-content">
+                        <h4>Invite Friends</h4>
+                        <h5>Groups</h5>
+                        {{#each friendGroup}}
+                            <p>
+                                <input type="checkbox" class="filled-in" id="{{friendGroup._id}}" />
+                                <label for="{{friendGroup._id}}">{{friendGroup.name}}</label>
+                            </p>
+                        {{/each}}
+                        <br>
+                        <h5>Friends</h5>
+                        {{#each friendList}}
+                            <p>
+                                <input type="checkbox" class="filled-in" id="{{friendList._id}}" />
+                                <label for="{{friendList._id}}">{{friendList.name}}</label>
+                            </p>
+                        {{/each}}
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Invite</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col s12">
+                    <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Create Event</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</template>

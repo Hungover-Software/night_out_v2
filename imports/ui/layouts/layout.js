@@ -8,3 +8,4 @@ import '../private/navbar.js';
 import '../private/landing.js';
 import '../private/friends.js';
 import '../private/event.js';
+import '../private/event_new.js';
