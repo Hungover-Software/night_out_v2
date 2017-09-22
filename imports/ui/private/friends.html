@@ -19,5 +19,18 @@
     <h3>Received Friend Requests</h3>
     {{#each receivedFriendRequestsList}}
       <h5>{{senderId}}</h5>
+      <form class="col s12" id="accept">
+        <div class="col s12">
+          <input type="hidden" name="requestId" value="{{_id}}" />
+          <input type="submit" name="accept" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Accept" />
+        </div>
+      </form>
+    {{/each}}
+
+    <h3>Friends</h3>
+    {{#each friendsList}}
+      {{#each friends}}
+        <h5>{{userId}}</h5>
+      {{/each}}
     {{/each}}
 </template>

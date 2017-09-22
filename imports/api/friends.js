@@ -52,6 +52,33 @@ if (Meteor.isServer) {
 
             return {success: true};
         },
+
+        'friendRequests.accept'(requestId) {
+
+            if (! this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
+
+            let request = FriendRequests.find({_id: requestId}).fetch()[0];
+
+            let friendsList = Friends.find({userId: this.userId}).fetch()[0];
+            let id = "";
+
+            if ( friendsList == null ) {
+                id = Friends.insert({userId: this.userId, friends: [] });
+            } else {
+                id = friendsList._id;
+            }
+
+            Friends.update({_id: id}, {$push: {"friends": {userId: request.senderId, acceptedDate: new Date()}}});
+            FriendRequests.remove({_id: request._id});
+
+            return {success: true};
+        },
+
+        'friendRequests.decline'(requestId) {
+
+        },
     });
 }
 

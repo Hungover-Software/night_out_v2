@@ -28,4 +28,22 @@ Template.friends.events({
 
     Meteor.call('friendRequests.insert', email);
   },
+
+  'submit #decline'(event) {
+    event.preventDefault();
+
+    const target = event.target;
+    const requestId = target.requestId.value;
+
+    Meteor.call('friendRequests.decline', requestId);
+  },
+
+  'submit #accept'(event) {
+    event.preventDefault();
+
+    const target = event.target;
+    const requestId = target.requestId.value;
+
+    Meteor.call('friendRequests.accept', requestId);
+  },
 })
