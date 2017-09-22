@@ -8,10 +8,10 @@ if (Meteor.isServer) {
     // This code only runs on the server
     // Only publish tasks that are public or belong to the current user
     Meteor.publish('friends', function tasksPublication() {
-        return Friends.find();
+        return Friends.find({userId: this.userId});
     });
     Meteor.publish('friendRequests', function tasksPublication() {
-        return FriendRequests.find();
+        return FriendRequests.find({$or: [{senderId: this.userId}, {receiverId: this.userId}] });
     });
 
     Meteor.methods({
