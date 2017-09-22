@@ -41,6 +41,11 @@ if (Meteor.isServer) {
                 throw new Meteor.Error('friendRequests.insert.already-sent', 'Friend request already sent to user');
             }
 
+            // Search to see if they are already friends!
+            if ( Friends.find({$and: [{userId: this.userId},{"friends.userId":friend._id}] }).count() > 0 ) {
+                throw new Meteor.Error('friendRequests.insert.already-friends', 'You are already friends with this person');
+            }
+
             // If the user tries to send a request to someone who already requested friendship, just make them friends.
             let receivedFriendRequest = FriendRequests.find({$and: [{senderId: friend._id}, {receiverId: this.userId}] }).fetch()[0];
 
@@ -49,8 +54,7 @@ if (Meteor.isServer) {
                 return {success: true};
             }
 
-            // Search to see if they are already friends!
-
+            // Now we can finally add the friend
             FriendRequests.insert({
                 senderId: this.userId,
                 receiverId: friend._id,
