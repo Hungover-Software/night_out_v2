@@ -115,6 +115,19 @@ if (Meteor.isServer) {
 
             return {success: true};
         },
+
+        'friends.unfriend'(friendId, date) {
+            // User must be logged in
+            if (! this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
+
+            // Remove the IDs of each person from each one's friends list
+            Friends.update({userId: this.userId}, {$pull: {"friends": {userId: friendId}}});
+            Friends.update({userId: friendId}, {$pull: {"friends": {userId: this.userId}}});
+
+            return {success: true};
+        }
     });
 }
 
