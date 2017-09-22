@@ -9,7 +9,7 @@ Template.friends.onCreated(function() {
 
 Template.friends.helpers({
   friendsList() {
-    return Friends.find({userId: Meteor.userId()});
+    return Friends.find();
   },
   sentFriendRequestsList() {
     return FriendRequests.find({senderId: Meteor.userId()});
@@ -32,18 +32,12 @@ Template.friends.events({
   'submit #decline'(event) {
     event.preventDefault();
 
-    const target = event.target;
-    const requestId = target.requestId.value;
-
-    Meteor.call('friendRequests.decline', requestId);
+    Meteor.call('friendRequests.decline', this._id);
   },
 
   'submit #accept'(event) {
     event.preventDefault();
 
-    const target = event.target;
-    const requestId = target.requestId.value;
-
-    Meteor.call('friendRequests.accept', requestId);
+    Meteor.call('friendRequests.accept', this._id);
   },
 })
