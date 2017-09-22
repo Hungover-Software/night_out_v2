@@ -11,7 +11,13 @@
       </div>
     </form>
 
+    <h3>Sent Friend Requests</h3>
     {{#each sentFriendRequestsList}}
       <h5>{{receiverId}}</h5>
+    {{/each}}
+
+    <h3>Received Friend Requests</h3>
+    {{#each receivedFriendRequestsList}}
+      <h5>{{senderId}}</h5>
     {{/each}}
 </template>

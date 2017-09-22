@@ -12,7 +12,6 @@ Template.friends.helpers({
     return Friends.find({userId: Meteor.userId()});
   },
   sentFriendRequestsList() {
-    console.log(Meteor.userId());
     return FriendRequests.find({senderId: Meteor.userId()});
   },
   receivedFriendRequestsList() {
