@@ -1,3 +1,17 @@
 <template name="friends">
     <p>friends template</p>
+
+    <form class="col s12" id="request">
+      <div class="input-field col s12">
+        <input type="text" name="friend_email" class="validate" />
+        <label for="friend_email" data-error="Invalid Email">Friend Email</label>
+      </div>
+      <div class="col s12">
+        <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Submit Friend Request</button>
+      </div>
+    </form>
+
+    {{#each sentFriendRequestsList}}
+      <h5>{{receiverId}}</h5>
+    {{/each}}
 </template>

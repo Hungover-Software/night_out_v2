@@ -13,7 +13,7 @@ if (Meteor.isServer) {
 var eventSchema = new SimpleSchema({
     creator_ID: {
         type: String,
-        label: 'Createor ID',
+        label: 'Creator ID',
     },
     event_name: {
         type: String,
@@ -38,11 +38,11 @@ Events.attachSchema(eventSchema);
 
 Meteor.methods({
     'events.insert'(event_name, event_date, invitees) {
-        
+
         if (! this.userId) {
             throw new Meteor.Error('not-authorized');
         }
-        
+
         Events.insert({
             creator_ID: this.userId,
             event_name: event_name,
@@ -53,12 +53,12 @@ Meteor.methods({
     },
     'events.remove'(eventId) {
         const event = Events.findOne(eventId);
-        
+
         if (event.creator_ID !== this.userId) {
           // If the task is private, make sure only the owner can delete it
           throw new Meteor.Error('not-authorized');
         }
-     
+
         Events.remove(eventId);
     },
 });
