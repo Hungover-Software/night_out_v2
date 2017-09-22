@@ -25,6 +25,12 @@
           <input type="submit" name="accept" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Accept" />
         </div>
       </form>
+      <form class="col s12" id="decline">
+        <div class="col s12">
+          <input type="hidden" name="requestId" value="{{_id}}" />
+          <input type="submit" name="accept" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Decline" />
+        </div>
+      </form>
     {{/each}}
 
     <h3>Friends</h3>
