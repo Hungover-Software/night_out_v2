@@ -40,4 +40,10 @@ Template.friends.events({
 
     Meteor.call('friendRequests.accept', this._id);
   },
+
+  'submit #unfriend'(event) {
+    event.preventDefault();
+
+    Meteor.call('friends.unfriend', this.userId, this.acceptedDate);
+  }
 })
