@@ -1,3 +1,42 @@
 <template name="friends">
     <p>friends template</p>
+
+    <form class="col s12" id="request">
+      <div class="input-field col s12">
+        <input type="text" name="friend_email" class="validate" />
+        <label for="friend_email" data-error="Invalid Email">Friend Email</label>
+      </div>
+      <div class="col s12">
+        <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Submit Friend Request</button>
+      </div>
+    </form>
+
+    <h3>Sent Friend Requests</h3>
+    {{#each sentFriendRequestsList}}
+      <h5>{{receiverId}}</h5>
+    {{/each}}
+
+    <h3>Received Friend Requests</h3>
+    {{#each receivedFriendRequestsList}}
+      <h5>{{senderId}}</h5>
+      <form class="col s12" id="accept">
+        <div class="col s12">
+          <input type="hidden" name="requestId" value="{{_id}}" />
+          <input type="submit" name="accept" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Accept" />
+        </div>
+      </form>
+      <form class="col s12" id="decline">
+        <div class="col s12">
+          <input type="hidden" name="requestId" value="{{_id}}" />
+          <input type="submit" name="accept" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Decline" />
+        </div>
+      </form>
+    {{/each}}
+
+    <h3>Friends</h3>
+    {{#each friendsList}}
+      {{#each friends}}
+        <h5>{{userId}}</h5>
+      {{/each}}
+    {{/each}}
 </template>
