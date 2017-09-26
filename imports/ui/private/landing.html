@@ -1,7 +1,7 @@
 <template name="landing">
     <h4>Upcoming Events</h4>
     {{#each eventList}}
-        <h5>{{event_name}}</h5>
+        <a href="event/{{_id}}"><h5>{{event_name}}</h5></a>
         <p>{{event_date}}</p>
     {{/each}}
 </template>
