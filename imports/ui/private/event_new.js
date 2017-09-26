@@ -1,9 +1,11 @@
 import './event_new.html';
 
 import { Events } from '../../api/events.js';
+import { Friends } from '../../api/friends.js';
 
 Template.event_new.onCreated(function() {
     Meteor.subscribe('events');
+    Meteor.subscribe('friends');
 });
 
 Template.event_new.onRendered(function() {
@@ -54,11 +56,11 @@ function convert12to24(timeStr) {
 Template.event_new.helpers({
     friendGroup() {
         
-        return ['test'];
+        return [{name: 'test'}];
     },
     
     friendList(){
-        return ['test'];
+        return Friends.find();
     },
 });
 

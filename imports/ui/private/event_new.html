@@ -34,20 +34,24 @@
                     <div class="modal-content">
                         <h4>Invite Friends</h4>
                         <h5>Groups</h5>
-                        {{#each friendGroup}}
-                            <p>
-                                <input type="checkbox" class="filled-in" id="{{friendGroup._id}}" />
-                                <label for="{{friendGroup._id}}">{{friendGroup.name}}</label>
-                            </p>
-                        {{/each}}
+                        <ul>
+                            {{#each friendGroup}}
+                                <li>
+                                    <input type="checkbox" class="filled-in" id="{{_id}}" />
+                                    <label for="{{_id}}">{{name}}</label>
+                                </li>
+                            {{/each}}
+                        </ul>
                         <br>
                         <h5>Friends</h5>
-                        {{#each friendList}}
-                            <p>
-                                <input type="checkbox" class="filled-in" id="{{friendList._id}}" />
-                                <label for="{{friendList._id}}">{{friendList.name}}</label>
-                            </p>
-                        {{/each}}
+                        <ul>    
+                            {{#each friendList}}
+                                <li>
+                                    <input type="checkbox" class="filled-in" id="{{_id}}" />
+                                    <label for="{{_id}}">{{name}}</label>
+                                </li>
+                            {{/each}}
+                        </ul>
                     </div>
                     <div class="modal-footer">
                         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Invite</a>

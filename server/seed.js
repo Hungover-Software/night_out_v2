@@ -17,6 +17,11 @@ if (Meteor.isServer && Meteor.isDevelopment) {
           username: "test3",
           password: "password",
         },
+        {
+          email: "nlyon@unomaha.edu",
+          username: "Nathan",
+          password: "password",
+        },
       ];
 
       _.each(accounts, function(account) {
