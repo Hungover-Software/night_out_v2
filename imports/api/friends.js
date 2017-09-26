@@ -75,13 +75,13 @@ if (Meteor.isServer) {
             let request = FriendRequests.find({_id: requestId}).fetch()[0];
 
             // Grab this person's friends list, creating a new one if the entry doesn't exist
-            let receiverFriendsList = Friends.find({userId: this.userId}).fetch()[0];
-            let receiverFriendsListId = "";
+            let myFriendsList = Friends.find({userId: this.userId}).fetch()[0];
+            let myFriendsListId = "";
 
-            if ( receiverFriendsList == null ) {
-                receiverFriendsListId = Friends.insert({userId: this.userId, friends: [] });
+            if ( myFriendsList == null ) {
+                myFriendsListId = Friends.insert({userId: this.userId, friends: [] });
             } else {
-                receiverFriendsListId = receiverFriendsList._id;
+                myFriendsListId = myFriendsList._id;
             }
 
             // Grab the sender's friends list, creating a new one if the entry doesn't exist
@@ -94,9 +94,32 @@ if (Meteor.isServer) {
                 senderFriendsListId = senderFriendsList._id;
             }
 
-            // Add each other to their friends lists
-            Friends.update({_id: receiverFriendsListId}, {$push: {"friends": {userId: request.senderId, acceptedDate: new Date()}}});
-            Friends.update({_id: senderFriendsListId}, {$push: {"friends": {userId: this.userId, acceptedDate: new Date()}}});
+            let thisUser = Meteor.user();
+            let otherUser = Meteor.users.findOne({_id: request.senderId});
+
+            // Add to this user's friends list
+            Friends.update({_id: myFriendsListId}, {
+                $push: {
+                    "friends": {
+                        userId: otherUser._id,
+                        username: otherUser.username,
+                        email: otherUser.emails[0].address,
+                        acceptedDate: new Date(),
+                    }
+                }
+            });
+
+            // Add to the other user's friends list
+            Friends.update({_id: senderFriendsListId}, {
+                $push: {
+                    "friends": {
+                        userId: this.userId,
+                        username: thisUser.username,
+                        email: thisUser.emails[0].address,
+                        acceptedDate: new Date(),
+                    }
+                }
+            });
 
             // Remove the friend request
             FriendRequests.remove({_id: request._id});
@@ -135,6 +158,14 @@ var friendsHelperSchema = new SimpleSchema({
     userId: {
         type: String,
         label: 'User ID',
+    },
+    username: {
+        type: String,
+        label: 'Username',
+    },
+    email: {
+        type: String,
+        label: 'Email',
     },
     acceptedDate: {
         type: String,
