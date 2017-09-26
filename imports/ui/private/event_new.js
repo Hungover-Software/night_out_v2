@@ -75,6 +75,27 @@ Template.event_new.events({
         
         const combinedDate = eventDate + ' ' + convert12to24(eventTime);
         
-        Meteor.call('events.insert', eventName, combinedDate, []);
+        let invitees = [];
+        
+        $('#invitees li').each(function(index, value) {
+            invitees.push({
+                userId: value.dataset.id,
+                username: value.dataset.email,
+                email: value.innerHTML,
+            });
+        });
+        
+        Meteor.call('events.insert', eventName, combinedDate, invitees);
+    },
+    
+    'change #friends input'(event) {
+        const target = event.target;
+        
+        if (target.checked) {
+            $('#invitees').append('<li id="inv-' + target.id + '" data-email="' + target.dataset.email + '" data-id="' + target.id + '">' + target.value + '</li>');
+        } else {
+            $('#inv-' + target.id).remove();
+        }
+        
     },
 });

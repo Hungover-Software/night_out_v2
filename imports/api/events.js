@@ -10,6 +10,36 @@ if (Meteor.isServer) {
   });
 }
 
+var attendeesHelperSchema = new SimpleSchema({
+   userId: {
+        type: String,
+        label: 'User ID',
+    },
+    username: {
+        type: String,
+        label: 'Username',
+    },
+    email: {
+        type: String,
+        label: 'Email',
+    }, 
+});
+
+var inviteesHelperSchema = new SimpleSchema({
+    userId: {
+        type: String,
+        label: 'User ID',
+    },
+    username: {
+        type: String,
+        label: 'Username',
+    },
+    email: {
+        type: String,
+        label: 'Email',
+    },
+});
+
 var eventSchema = new SimpleSchema({
     creator_ID: {
         type: String,
@@ -25,12 +55,10 @@ var eventSchema = new SimpleSchema({
         label: 'Event Date and Time',
     },
     invitees: {
-        type: [String],
-        label: 'Invitees User ID',
+        type: [inviteesHelperSchema],
     },
     attendees: {
-        type: [String],
-        label: 'Attendees User ID',
+        type: [attendeesHelperSchema],
     },
 });
 

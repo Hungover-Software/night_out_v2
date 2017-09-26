@@ -34,22 +34,24 @@
                     <div class="modal-content">
                         <h4>Invite Friends</h4>
                         <h5>Groups</h5>
-                        <ul>
+                        <ul id="groups">
                             {{#each friendGroup}}
                                 <li>
-                                    <input type="checkbox" class="filled-in" id="{{_id}}" />
+                                    <input type="checkbox" class="filled-in" id="{{_id}}"/>
                                     <label for="{{_id}}">{{name}}</label>
                                 </li>
                             {{/each}}
                         </ul>
                         <br>
                         <h5>Friends</h5>
-                        <ul>    
+                        <ul id="friends">    
                             {{#each friendList}}
-                                <li>
-                                    <input type="checkbox" class="filled-in" id="{{_id}}" />
-                                    <label for="{{_id}}">{{name}}</label>
-                                </li>
+                                {{#each friends}}
+                                    <li>
+                                        <input type="checkbox" class="filled-in" id="{{userId}}" value="{{username}}" data-email="{{email}}"/>
+                                        <label for="{{userId}}">{{username}} ({{email}})</label>
+                                    </li>
+                                {{/each}}
                             {{/each}}
                         </ul>
                     </div>
@@ -58,6 +60,9 @@
                     </div>
                   </div>
                 </div>
+                <ul id="invitees">
+                    
+                </ul>
                 <div class="col s12">
                     <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Create Event</button>
                 </div>
