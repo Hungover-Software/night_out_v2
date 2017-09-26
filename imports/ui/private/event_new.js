@@ -1,9 +1,11 @@
 import './event_new.html';
 
 import { Events } from '../../api/events.js';
+import { Friends } from '../../api/friends.js';
 
 Template.event_new.onCreated(function() {
     Meteor.subscribe('events');
+    Meteor.subscribe('friends');
 });
 
 Template.event_new.onRendered(function() {
@@ -54,11 +56,11 @@ function convert12to24(timeStr) {
 Template.event_new.helpers({
     friendGroup() {
         
-        return ['test'];
+        return [{name: 'test'}];
     },
     
     friendList(){
-        return ['test'];
+        return Friends.find();
     },
 });
 
@@ -73,6 +75,27 @@ Template.event_new.events({
         
         const combinedDate = eventDate + ' ' + convert12to24(eventTime);
         
-        Meteor.call('events.insert', eventName, combinedDate, []);
+        let invitees = [];
+        
+        $('#invitees li').each(function(index, value) {
+            invitees.push({
+                userId: value.dataset.id,
+                username: value.dataset.email,
+                email: value.innerHTML,
+            });
+        });
+        
+        Meteor.call('events.insert', eventName, combinedDate, invitees);
+    },
+    
+    'change #friends input'(event) {
+        const target = event.target;
+        
+        if (target.checked) {
+            $('#invitees').append('<li id="inv-' + target.id + '" data-email="' + target.dataset.email + '" data-id="' + target.id + '">' + target.value + '</li>');
+        } else {
+            $('#inv-' + target.id).remove();
+        }
+        
     },
 });
