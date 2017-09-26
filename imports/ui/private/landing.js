@@ -8,10 +8,6 @@ Template.landing.onCreated(function() {
 
 Template.landing.helpers({
     eventList(){
-        //Events.find({creator_ID:Meteor.userId() || atendees.friend_ID:Meteor.userId()})
-        console.log('here');
-        console.log(Events.find().fetch);
-        return Events.find({creator_ID:Meteor.userId()});
-        
+        return Events.find();
     },
-})
+});

@@ -6,7 +6,13 @@ if (Meteor.isServer) {
   // This code only runs on the server
   // Only publish tasks that are public or belong to the current user
   Meteor.publish('events', function tasksPublication() {
-    return Events.find();
+    return Events.find({
+            $or: [
+                {creator_ID: Meteor.userId()},
+                {'invitees': {$in: [Meteor.userId()]} },
+                {'attendees': {$in: [Meteor.userId()]} }
+            ]
+        });
   });
 }
 
