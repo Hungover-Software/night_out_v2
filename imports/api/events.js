@@ -9,8 +9,8 @@ if (Meteor.isServer) {
     return Events.find({
             $or: [
                 {creator_ID: Meteor.userId()},
-                {'invitees': {$in: [Meteor.userId()]} },
-                {'attendees': {$in: [Meteor.userId()]} }
+                {'invitees.userId': {$in: [Meteor.userId()]} },
+                {'attendees.userId': {$in: [Meteor.userId()]} }
             ]
         });
   });
