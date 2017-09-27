@@ -22,15 +22,26 @@ if (Meteor.isServer && Meteor.isDevelopment) {
           username: "Nathan",
           password: "password",
         },
+        {
+          email: "logan@gmail.com",
+          username: "Logan",
+          password: "password",
+        },
+        {
+          email: "cal@gmail.com",
+          username: "Cal",
+          password: "password",
+        },
       ];
 
-      _.each(accounts, function(account) {
+
+      for ( let account of accounts ) {
         Accounts.createUser({
           email: account.email,
           username: account.username,
           password: account.password,
         });
-      });
+      }
     }
   })
 }
