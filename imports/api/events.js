@@ -44,6 +44,44 @@ var inviteesHelperSchema = new SimpleSchema({
         type: String,
         label: 'Email',
     },
+    
+});
+
+var stopHelperSchema = new SimpleSchema({
+    userId: {
+        type: String,
+        label: 'User ID',
+    },
+    username: {
+        type: String,
+        label: 'Username',
+    },
+    email: {
+        type: String,
+        label: 'Email',
+    },
+    stopName: {
+        type: String,
+        label: 'Stop Name',
+    },
+    
+});
+
+var categoryHelperSchema = new SimpleSchema({
+    catName: {
+        type: String,
+        label: 'Category Name',
+    },
+    order: {
+        type: SimpleSchema.Integer,
+        label: 'Order',
+        
+    },
+    stop: {
+        type: [stopHelperSchema],
+        label: 'Stop',
+    },
+    
 });
 
 var eventSchema = new SimpleSchema({
@@ -62,9 +100,15 @@ var eventSchema = new SimpleSchema({
     },
     invitees: {
         type: [inviteesHelperSchema],
+        label: 'Invitees',
     },
     attendees: {
         type: [attendeesHelperSchema],
+        label: 'Atendees',
+    },
+    category:{
+        type: [categoryHelperSchema],
+        label: 'Categories',
     },
 });
 
