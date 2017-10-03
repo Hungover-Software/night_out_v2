@@ -1,4 +1,5 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { BasicUserInfoSchema, GetBasicUserInfo } from './basic-user-info';
 
 export const Events = new Mongo.Collection('events');
 
@@ -16,55 +17,15 @@ if (Meteor.isServer) {
     });
 }
 
-var attendeesHelperSchema = new SimpleSchema({
-    userId: {
-        type: String,
-        label: 'User ID',
-    },
-    username: {
-        type: String,
-        label: 'Username',
-    },
-    email: {
-        type: String,
-        label: 'Email',
-    },
-});
-
-var inviteesHelperSchema = new SimpleSchema({
-    userId: {
-        type: String,
-        label: 'User ID',
-    },
-    username: {
-        type: String,
-        label: 'Username',
-    },
-    email: {
-        type: String,
-        label: 'Email',
-    },
-
-});
-
 var stopHelperSchema = new SimpleSchema({
-    userId: {
-        type: String,
-        label: 'User ID',
-    },
-    username: {
-        type: String,
-        label: 'Username',
-    },
-    email: {
-        type: String,
-        label: 'Email',
+    stopUser: {
+        type: BasicUserInfoSchema,
+        label: 'Suggestor',
     },
     stopName: {
         type: String,
         label: 'Stop Name',
     },
-
 });
 
 var categoryHelperSchema = new SimpleSchema({
@@ -115,11 +76,11 @@ var eventSchema = new SimpleSchema({
         label: 'Event Date and Time',
     },
     invitees: {
-        type: [inviteesHelperSchema],
+        type: [BasicUserInfoSchema],
         label: 'Invitees',
     },
     attendees: {
-        type: [attendeesHelperSchema],
+        type: [BasicUserInfoSchema],
         label: 'Atendees',
     },
     categories:{
