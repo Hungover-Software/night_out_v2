@@ -5,6 +5,7 @@ import {Friends, FriendRequests} from '../../api/friends.js';
 Template.friends.onCreated(function() {
     Meteor.subscribe('friends');
     Meteor.subscribe('friendRequests');
+    console.log(FriendRequests.find().count());
 });
 
 Template.friends.helpers({
@@ -13,11 +14,11 @@ Template.friends.helpers({
   },
 
   sentFriendRequestsList() {
-    return FriendRequests.find({senderId: Meteor.userId()});
+    return FriendRequests.find({'sender.userId': Meteor.userId()});
   },
 
   receivedFriendRequestsList() {
-    return FriendRequests.find({receiverId: Meteor.userId()});
+    return FriendRequests.find({'receiver.userId': Meteor.userId()});
   },
 })
 
@@ -46,6 +47,6 @@ Template.friends.events({
   'submit #unfriend'(event) {
     event.preventDefault();
 
-    Meteor.call('friends.unfriend', this.userId, this.acceptedDate);
+    Meteor.call('friends.unfriend', this.friend.userId);
   }
 })
