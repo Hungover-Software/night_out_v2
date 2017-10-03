@@ -127,6 +127,7 @@ Meteor.methods({
             event_date: event_date,
             invitees: invitees,
             attendees: [],
+            category: [],
         });
     },
     'events.remove'(eventId) {
