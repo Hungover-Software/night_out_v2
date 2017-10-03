@@ -1,4 +1,4 @@
-    <!--
+<!--
     # Night Out event planning application
     # Hungover Software
     # University of Nebraska Omaha
@@ -12,18 +12,20 @@
         <h1 class="center">Create Event</h1>
         <div class="row">
             <form class="col s12" id="new">
-                <div class="input-field col s12">
-                    <input type="text" name="event_name" class="validate" />
-                    <label for="event_name" data-error="Invalid Email">Event Name</label>
-                </div>
-                
-                <div class="col s12 l6">
-                    <label for="event_date">Event Date</label>
-                    <input id="event_date" class="validate datepicker" />
-                </div>
-                <div class="col s12 l6">
-                    <label for="event_time">Event Time</label>
-                    <input id="event_time" class="validate timepicker">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="text" name="event_name" class="validate" />
+                        <label for="event_name" data-error="Invalid Email">Event Name</label>
+                    </div>
+                    
+                    <div class="col s12 l6">
+                        <label for="event_date">Event Date</label>
+                        <input id="event_date" class="validate datepicker" />
+                    </div>
+                    <div class="col s12 l6">
+                        <label for="event_time">Event Time</label>
+                        <input id="event_time" class="validate timepicker">
+                    </div>
                 </div>
                 <div>
                 <!-- Modal Trigger -->
@@ -63,11 +65,40 @@
                 <ul id="invitees">
                     
                 </ul>
+                <div class="row">
+                    <h5>Categories</h5>
+                    
+                    {{> categories}}
+                </div>
                 <div class="col s12">
                     <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Create Event</button>
                 </div>
             </form>
             
+        </div>
+    </div>
+</template>
+
+<template name="categories">
+
+    {{#each inputs}}
+        {{> category}}
+    {{/each}}
+  
+    <div class="col s6">
+        <a href="" id="addCategory" uniqid="{{uniqid}}"><i class="material-icons medium green-text">add</i></a>
+    </div>
+    
+</template>
+
+<template name='category'>
+    <div class="row">
+        <div class="input-field col s10">
+            <input name='categoryName-{{uniqid}}' class='test-input' type='text' uniqid="{{uniqid}}" value="{{value}}">
+            <label for="categoryName-{{uniqid}}">Category</label>
+        </div>
+        <div class="col s2">
+            <a href="" class="remove-input" uniqid="{{uniqid}}"><i class="material-icons medium red-text">clear</i></a>
         </div>
     </div>
 </template>
