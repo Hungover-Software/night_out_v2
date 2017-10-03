@@ -1,3 +1,28 @@
 <template name="event">
-    <p>event template</p>
+  {{#each getEvent}}
+    <h5>{{event_name}}</h5>
+    <p>{{creator_ID}}</p>
+    <p>{{event_date}}</p>
+    {{#each invitees}}
+      <p>{{username}}</p>
+    {{/each}}
+    {{#each attendees}}
+      <p>{{username}}</p>
+    {{/each}}
+    {{#each categories}}
+      <p>{{catName}}</p>
+    {{/each}}
+    {{#each comments}}
+      <p>{{username}} - {{comment}}</p>
+    {{/each}}
+  {{/each}}
+
+  <form class="col s12" id="comment">
+    <div class="input-field col s12">
+      <input type="text-comment" name="comment" />
+    </div>
+    <div class="col s12">
+      <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Comment</button>
+    </div>
+  </form>
 </template>

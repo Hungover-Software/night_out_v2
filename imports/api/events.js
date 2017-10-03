@@ -5,19 +5,19 @@ export const Events = new Mongo.Collection('events');
 if (Meteor.isServer) {
   // This code only runs on the server
   // Only publish tasks that are public or belong to the current user
-  Meteor.publish('events', function tasksPublication() {
-    return Events.find({
+    Meteor.publish('events', function tasksPublication() {
+        return Events.find({
             $or: [
                 {creator_ID: Meteor.userId()},
                 {'invitees.userId': {$in: [Meteor.userId()]} },
                 {'attendees.userId': {$in: [Meteor.userId()]} }
             ]
         });
-  });
+    });
 }
 
 var attendeesHelperSchema = new SimpleSchema({
-   userId: {
+    userId: {
         type: String,
         label: 'User ID',
     },
@@ -28,7 +28,7 @@ var attendeesHelperSchema = new SimpleSchema({
     email: {
         type: String,
         label: 'Email',
-    }, 
+    },
 });
 
 var inviteesHelperSchema = new SimpleSchema({
@@ -44,7 +44,7 @@ var inviteesHelperSchema = new SimpleSchema({
         type: String,
         label: 'Email',
     },
-    
+
 });
 
 var stopHelperSchema = new SimpleSchema({
@@ -64,7 +64,7 @@ var stopHelperSchema = new SimpleSchema({
         type: String,
         label: 'Stop Name',
     },
-    
+
 });
 
 var categoryHelperSchema = new SimpleSchema({
@@ -75,14 +75,29 @@ var categoryHelperSchema = new SimpleSchema({
     order: {
         type: SimpleSchema.Integer,
         label: 'Order',
-        
+
     },
     stop: {
         type: [stopHelperSchema],
         label: 'Stop',
         optional : true,
     },
-    
+
+});
+
+var commentSchema = new SimpleSchema({
+    username: {
+        type: String,
+        label: 'Commenter',
+    },
+    comment: {
+        type: String,
+        label: 'Comment',
+    },
+    timestamp: {
+        type: Date,
+        label: 'Timestamp',
+    },
 });
 
 var eventSchema = new SimpleSchema({
@@ -107,9 +122,13 @@ var eventSchema = new SimpleSchema({
         type: [attendeesHelperSchema],
         label: 'Atendees',
     },
-    category:{
+    categories:{
         type: [categoryHelperSchema],
         label: 'Categories',
+    },
+    comments: {
+        type: [commentSchema],
+        label: 'Comments',
     },
 });
 
@@ -129,6 +148,7 @@ Meteor.methods({
             invitees: invitees,
             attendees: [],
             category: categories,
+            comments: [],
         });
     },
     'events.remove'(eventId) {
@@ -141,4 +161,25 @@ Meteor.methods({
 
         Events.remove(eventId);
     },
+
+    'event.comment' (eventId, message) {
+        if (! this.userId) {
+            throw new Meteor.Error('not-authorized');
+        }
+
+        let event = Events.findOne({_id: eventId});
+        if (event == null) {
+            throw new Meteor.Error('Event with given ID doens\'t exist');
+        }
+
+        let comment = {
+            username: Meteor.user().username,
+            comment: message,
+            timestamp: Date.now(),
+        }
+
+        Events.update({_id: eventId}, {$push: {'comments': comment}});
+
+        return {success: true};
+    }
 });
