@@ -1,3 +1,5 @@
+import { Session } from 'meteor/session';
+
 import './event_new.html';
 
 import { Events } from '../../api/events.js';
@@ -6,6 +8,15 @@ import { Friends } from '../../api/friends.js';
 Template.event_new.onCreated(function() {
     Meteor.subscribe('events');
     Meteor.subscribe('friends');
+});
+
+Template.categories.onCreated(function() {
+  Session.set('catInputCount', 0);
+  Session.set('catInputs', []); // on page load, set this to have no inputs
+});
+
+Template.categories.onRendered(function() {
+    $('#addCategory').click();
 });
 
 Template.event_new.onRendered(function() {
@@ -32,6 +43,22 @@ Template.event_new.onRendered(function() {
     });
     
     $('.modal').modal();
+});
+
+Template.categories.helpers({
+  inputs: function() {
+    return Session.get('catInputs'); // reactively watches the Session variable, so when it changes, this result will change and our template will change
+  }
+});
+
+Template.categories.events({
+  'click #addCategory': function() {
+    var inputs = Session.get('catInputs');
+    var uniqid = Session.get('catInputCount')
+    inputs.push({ uniqid: uniqid, value: "" });
+    Session.set('catInputCount', ++uniqid);
+    Session.set('catInputs', inputs);
+  }
 });
 
 function convert12to24(timeStr) {
@@ -85,7 +112,18 @@ Template.event_new.events({
             });
         });
         
-        Meteor.call('events.insert', eventName, combinedDate, invitees);
+        const catInputs = Session.get('catInputs');
+        var categories = [];
+        
+        $.each(catInputs, function(i, e) {
+            categories.push({
+                catName: e.value,
+                order: e.uniqid,
+            });
+        });
+        console.log(categories);
+        
+        Meteor.call('events.insert', eventName, combinedDate, invitees, categories);
     },
     
     'change #friends input'(event) {
@@ -98,4 +136,21 @@ Template.event_new.events({
         }
         
     },
+});
+
+Template.category.events({
+  'click .remove-input': function(event) {
+    var uniqid = $(event.currentTarget).attr('uniqid');
+    var inputs = Session.get('catInputs');
+    inputs = _.filter(inputs, function(x) { return x.uniqid != uniqid; });
+    Session.set('catInputs', inputs);
+  },
+  'change input': function(event) {
+    var $input = $(event.currentTarget);
+    var uniqid = $input.attr('uniqid');
+    var inputs = Session.get('catInputs');
+    index = inputs.findIndex(function(x) { return x.uniqid == uniqid; });
+    inputs[index].value = $input.val();
+    Session.set('catInputs', inputs);
+  }
 });

@@ -80,6 +80,7 @@ var categoryHelperSchema = new SimpleSchema({
     stop: {
         type: [stopHelperSchema],
         label: 'Stop',
+        optional : true,
     },
     
 });
@@ -115,7 +116,7 @@ var eventSchema = new SimpleSchema({
 Events.attachSchema(eventSchema);
 
 Meteor.methods({
-    'events.insert'(event_name, event_date, invitees) {
+    'events.insert'(event_name, event_date, invitees, categories) {
 
         if (! this.userId) {
             throw new Meteor.Error('not-authorized');
@@ -127,7 +128,7 @@ Meteor.methods({
             event_date: event_date,
             invitees: invitees,
             attendees: [],
-            category: [],
+            category: categories,
         });
     },
     'events.remove'(eventId) {
