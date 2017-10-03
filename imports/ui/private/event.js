@@ -13,7 +13,7 @@ Template.event.helpers({
     return Events.find({_id: FlowRouter.getParam('_id')});
   }
 
-})
+});
 
 Template.event.events({
   'submit #comment'(event) {
@@ -26,4 +26,4 @@ Template.event.events({
       Meteor.call('event.comment', FlowRouter.getParam('_id'), comment);
     }
   },
-})
+});
