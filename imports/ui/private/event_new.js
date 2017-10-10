@@ -69,11 +69,12 @@ function convert12to24(timeStr) {
     {
         if (hours!=12)
         {
-            hours=hours*1+12;
+            hours=parseInt(hours)+12;
         }
-        else
-        {
-            hours = (minutes!='00') ? '0' : '24' ;
+    }
+    else {
+        if (hours == 12) {
+            hours = '00';
         }
     }
 
@@ -122,9 +123,8 @@ Template.event_new.events({
                 stop: [],
             });
         });
-        console.log(categories);
         
-        Meteor.call('events.insert', eventName, combinedDate, invitees, categories);
+        Meteor.call('events.insert', eventName, new Date(combinedDate), invitees, categories);
         
         FlowRouter.go('home');
     },
