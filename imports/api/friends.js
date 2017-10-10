@@ -1,5 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Accounts } from 'meteor/accounts-base';
+import { BasicUserInfoSchema, GetBasicUserInfo } from './basic-user-info';
 
 export const Friends = new Mongo.Collection('friends');
 export const FriendRequests = new Mongo.Collection('friend-requests');
@@ -11,7 +12,7 @@ if (Meteor.isServer) {
         return Friends.find({userId: this.userId});
     });
     Meteor.publish('friendRequests', function tasksPublication() {
-        return FriendRequests.find({$or: [{senderId: this.userId}, {receiverId: this.userId}] });
+        return FriendRequests.find({$or: [{'sender.userId': this.userId}, {'receiver.userId': this.userId}] });
     });
 
     Meteor.methods({
@@ -35,29 +36,28 @@ if (Meteor.isServer) {
             }
 
             // Don't let the user send multiple requests
-            let sentFriendRequest = FriendRequests.find({receiverId: friend._id}).fetch()[0];
+            let sentFriendRequest = FriendRequests.findOne({'receiver.userId': friend._id});
 
             if ( sentFriendRequest != null ) {
                 throw new Meteor.Error('friendRequests.insert.already-sent', 'Friend request already sent to user');
             }
 
             // Search to see if they are already friends!
-            if ( Friends.find({$and: [{userId: this.userId},{"friends.userId":friend._id}] }).count() > 0 ) {
+            if ( Friends.find({$and: [{userId: this.userId},{"friends.friend.userId":friend._id}] }).count() > 0 ) {
                 throw new Meteor.Error('friendRequests.insert.already-friends', 'You are already friends with this person');
             }
 
             // If the user tries to send a request to someone who already requested friendship, just make them friends.
-            let receivedFriendRequest = FriendRequests.find({$and: [{senderId: friend._id}, {receiverId: this.userId}] }).fetch()[0];
+            let receivedFriendRequest = FriendRequests.findOne({$and: [{'sender.userId': friend._id}, {'receiver.userId': this.userId}] });
 
             if ( receivedFriendRequest != null ) {
                 Meteor.call('friendRequests.accept', receivedFriendRequest._id);
                 return {success: true};
             }
 
-            // Now we can finally add the friend
             FriendRequests.insert({
-                senderId: this.userId,
-                receiverId: friend._id,
+                sender: GetBasicUserInfo(this.userId),
+                receiver: GetBasicUserInfo(friend._id),
                 sentDate: new Date(),
             });
 
@@ -72,10 +72,10 @@ if (Meteor.isServer) {
             }
 
             // Grab the friend request to pull information from it later
-            let request = FriendRequests.find({_id: requestId}).fetch()[0];
+            let request = FriendRequests.findOne({_id: requestId});
 
             // Grab this person's friends list, creating a new one if the entry doesn't exist
-            let myFriendsList = Friends.find({userId: this.userId}).fetch()[0];
+            let myFriendsList = Friends.findOne({userId: this.userId});
             let myFriendsListId = "";
 
             if ( myFriendsList == null ) {
@@ -85,25 +85,22 @@ if (Meteor.isServer) {
             }
 
             // Grab the sender's friends list, creating a new one if the entry doesn't exist
-            let senderFriendsList = Friends.find({userId: request.senderId}).fetch()[0];
+            let senderFriendsList = Friends.findOne({userId: request.sender.userId});
             let senderFriendsListId = "";
 
             if ( senderFriendsList == null ) {
-                senderFriendsListId = Friends.insert({userId: request.senderId, friends: [] });
+                senderFriendsListId = Friends.insert({userId: request.sender.userId, friends: [] });
             } else {
                 senderFriendsListId = senderFriendsList._id;
             }
 
-            let thisUser = Meteor.user();
-            let otherUser = Meteor.users.findOne({_id: request.senderId});
+            let otherUserId = Meteor.users.findOne({_id: request.sender.userId})._id;
 
             // Add to this user's friends list
             Friends.update({_id: myFriendsListId}, {
                 $push: {
                     "friends": {
-                        userId: otherUser._id,
-                        username: otherUser.username,
-                        email: otherUser.emails[0].address,
+                        friend: GetBasicUserInfo(otherUserId),
                         acceptedDate: new Date(),
                     }
                 }
@@ -113,9 +110,7 @@ if (Meteor.isServer) {
             Friends.update({_id: senderFriendsListId}, {
                 $push: {
                     "friends": {
-                        userId: this.userId,
-                        username: thisUser.username,
-                        email: thisUser.emails[0].address,
+                        friend: GetBasicUserInfo(this.userId),
                         acceptedDate: new Date(),
                     }
                 }
@@ -139,15 +134,15 @@ if (Meteor.isServer) {
             return {success: true};
         },
 
-        'friends.unfriend'(friendId, date) {
+        'friends.unfriend'(friendId) {
             // User must be logged in
             if (! this.userId) {
                 throw new Meteor.Error('not-authorized');
             }
 
             // Remove the IDs of each person from each one's friends list
-            Friends.update({userId: this.userId}, {$pull: {"friends": {userId: friendId}}});
-            Friends.update({userId: friendId}, {$pull: {"friends": {userId: this.userId}}});
+            Friends.update({userId: this.userId}, {$pull: {"friends": {'friend.userId': friendId}}});
+            Friends.update({userId: friendId}, {$pull: {"friends": {'friend.userId': this.userId}}});
 
             return {success: true};
         }
@@ -155,17 +150,9 @@ if (Meteor.isServer) {
 }
 
 var friendsHelperSchema = new SimpleSchema({
-    userId: {
-        type: String,
-        label: 'User ID',
-    },
-    username: {
-        type: String,
-        label: 'Username',
-    },
-    email: {
-        type: String,
-        label: 'Email',
+    friend: {
+        type: BasicUserInfoSchema,
+        label: 'Friend Info',
     },
     acceptedDate: {
         type: String,
@@ -180,18 +167,19 @@ var friendsSchema = new SimpleSchema({
     },
     friends: {
         type: [friendsHelperSchema],
+        label: 'Friends List',
     },
 });
 
 Friends.attachSchema(friendsSchema);
 
 var friendRequestSchema = new SimpleSchema({
-    senderId: {
-        type: String,
+    sender: {
+        type: BasicUserInfoSchema,
         label: 'Sender ID',
     },
-    receiverId: {
-        type: String,
+    receiver: {
+        type: BasicUserInfoSchema,
         label: 'Receiver ID',
     },
     sentDate: {
