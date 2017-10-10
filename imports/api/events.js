@@ -1,4 +1,5 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Random } from 'meteor/random';
 
 export const Events = new Mongo.Collection('events');
 
@@ -48,6 +49,15 @@ var inviteesHelperSchema = new SimpleSchema({
 });
 
 var stopHelperSchema = new SimpleSchema({
+    stopId: {
+        type: String,
+        label: 'catId',
+        autoValue: function() {
+            if (!this.isSet) {
+                return Random.id();
+            }
+        }
+    },
     userId: {
         type: String,
         label: 'User ID',
@@ -64,10 +74,23 @@ var stopHelperSchema = new SimpleSchema({
         type: String,
         label: 'Stop Name',
     },
+    votes: {
+        type: [String],
+        label: 'UserIds for votes'
+    }
 
 });
 
 var categoryHelperSchema = new SimpleSchema({
+    catId: {
+        type: String,
+        label: 'catId',
+        autoValue: function() {
+            if (!this.isSet) {
+                return Random.id();
+            }
+        }
+    },
     catName: {
         type: String,
         label: 'Category Name',
@@ -147,7 +170,7 @@ Meteor.methods({
             event_date: event_date,
             invitees: invitees,
             attendees: [],
-            category: categories,
+            categories: categories,
             comments: [],
         });
     },
@@ -181,5 +204,25 @@ Meteor.methods({
         Events.update({_id: eventId}, {$push: {'comments': comment}});
 
         return {success: true};
-    }
+    },
+    'event.addStop' (eventId, catId, stopName) {
+        if (! this.userId) {
+            throw new Meteor.Error('not-authorized');
+        }
+        
+        let event = Events.findOne({_id: eventId});
+        if (event == null) {
+            throw new Meteor.Error('Event with given ID doens\'t exist');
+        }
+        
+        let stop = {
+            userId: Meteor.userId(),
+            username: Meteor.user().username,
+            email: Meteor.user().emails[0].address,
+            stopName: stopName,
+            votes: [],
+        }
+        
+        Events.update({_id: eventId, 'categories.catId': catId}, {$push: {'categories.$.stop': stop}});
+    },
 });

@@ -1,28 +1,62 @@
 <template name="event">
   {{#each getEvent}}
     <h5>{{event_name}}</h5>
-    <p>{{creator_ID}}</p>
+    <!--<p>{{creator_ID}}</p>-->
     <p>{{event_date}}</p>
+    <h5>Invitees</h5>
     {{#each invitees}}
       <p>{{username}}</p>
     {{/each}}
-    {{#each attendees}}
+    <!--{{#each attendees}}
       <p>{{username}}</p>
-    {{/each}}
+    {{/each}} -->
+    <h5>Categories</h5>
     {{#each categories}}
       <p>{{catName}}</p>
+      <h7>Stops</h7>
+      <form class="addStop">
+        <div class="input-field col s6">
+          <input name="stopName" type="text" class="validate" />
+          <label for="stopName">Add Stop</label>
+          <input type="hidden" name="catId" value="{{catId}}" />
+          <div class="col s6">
+            <button type="submit" class="btn-flat"><i class="material-icons green-text" style="font-size:50px;">add</i></button>
+          </div>
+        </div>
+      </form>
+      {{#each stop}}
+        {{stopName}}  
+      {{/each}}
+      
     {{/each}}
-    {{#each comments}}
-      <p>{{username}} - {{comment}}</p>
-    {{/each}}
+    
+    <!-- Modal Trigger -->
+    <a class="modal-trigger comment-modal-trigger" href="#comment-modal">
+      <footer class="page-footer blue-grey lighten-2">
+        <h5>Comment<i class="material-icons medium">arrow_drop_up</i></h5>
+      </footer>
+    </a>
+    
+    {{> comment_modal}}
   {{/each}}
+</template>
 
-  <form class="col s12" id="comment">
-    <div class="input-field col s12">
-      <input type="text-comment" name="comment" />
+<template name='comment_modal'>
+  <!-- Modal Structure -->
+  <div id="comment-modal" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Comments</h4>
+      {{#each comments}}
+        <p>{{username}} - {{comment}}</p>
+      {{/each}}
+      <form class="col s12" id="comment">
+        <div class="input-field col s12">
+          <input type="text-comment" name="comment" />
+        </div>
+        <div class="col s12">
+          <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Comment</button>
+        </div>
+      </form>
     </div>
-    <div class="col s12">
-      <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Comment</button>
-    </div>
-  </form>
+  </div>
 </template>
