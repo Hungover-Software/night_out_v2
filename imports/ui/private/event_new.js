@@ -119,11 +119,14 @@ Template.event_new.events({
             categories.push({
                 catName: e.value,
                 order: e.uniqid,
+                stop: [],
             });
         });
         console.log(categories);
         
         Meteor.call('events.insert', eventName, combinedDate, invitees, categories);
+        
+        FlowRouter.go('home');
     },
     
     'change #friends input'(event) {
