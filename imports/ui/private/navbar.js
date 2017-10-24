@@ -3,7 +3,9 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import './navbar.html';
 
 Template.privateNavbar.onRendered(function() {
-    $(".button-collapse").sideNav();
+    $(".button-collapse").sideNav({
+        closeOnClick: true,
+    });
 });
 
 Template.privateNavbar.events({
