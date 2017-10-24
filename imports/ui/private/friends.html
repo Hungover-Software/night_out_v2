@@ -73,8 +73,8 @@
         {{#each friendsList}}
           {{#each friends}}
             <li>
-              <input type="checkbox" class="filled-in" id="{{userId}}" value="{{username}}" data-email="{{email}}"/>
-              <label for="{{userId}}">{{username}} ({{email}})</label>
+              <input type="checkbox" class="filled-in" id="{{friend.userId}}" value="{{friend.username}}" data-email="{{friend.email}}"/>
+              <label for="{{friend.userId}}">{{friend.username}} ({{friend.email}})</label>
             </li>
           {{/each}}
         {{/each}}
