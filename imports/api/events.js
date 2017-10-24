@@ -185,4 +185,34 @@ Meteor.methods({
         
         Events.update({_id: eventId, 'categories.catId': catId}, {$push: {'categories.$.stop': stop}});
     },
+    'event.changeVote' (eventId, catId, stopId) {
+        if (! this.userId) {
+            throw new Meteor.Error('not-authorized');
+        }
+        
+        let event = Events.findOne({_id: eventId});
+        if (event == null) {
+            throw new Meteor.Error('Event with given ID doens\'t exist');
+        }
+        
+        let stopArray;
+        
+        for (let category of event.categories) {
+            if (category.catId === catId) {
+                stopArray = category.stop;
+                for (let stop of stopArray) {
+                    for (let i=0; i < stop.votes.length; i++) {
+                        if (stop.votes[i] === this.userId) {
+                            stop.votes.splice(i, 1);
+                        }
+                    }
+                    if (stop.stopId === stopId) {
+                        stop.votes.push(this.userId);
+                    }
+                }
+            }
+        }
+        
+        Events.update({_id: eventId, 'categories.catId': catId}, {$set: {'categories.$.stop': stopArray}});
+    },
 });
