@@ -15,8 +15,15 @@ Template.comment_modal.onRendered(function() {
 Template.event.helpers({
   getEvent() {
     return Events.find({_id: FlowRouter.getParam('_id')});
+  },
+  isChecked(votes) {
+    for (let vote of votes) {
+      if (vote === Meteor.userId()) {
+        return 'checked';
+      }
+    }
+    return '';
   }
-
 });
 
 Template.event.events({
@@ -42,5 +49,12 @@ Template.event.events({
     Meteor.call('event.addStop', FlowRouter.getParam('_id'), catId, stopName);
     
     target.stopName.value = '';
+  },
+  'change input[type="radio"]'(event) {
+    const target = event.target;
+    const catId = target.name;
+    const stopId = target.id;
+    
+    Meteor.call('event.changeVote', FlowRouter.getParam('_id'), catId, stopId);
   },
 });
