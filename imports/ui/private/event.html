@@ -28,7 +28,7 @@
       {{#each stop}}
         <p>
           <input name="{{../catId}}" type="radio" id="{{stopId}}" {{isChecked votes}}/>
-          <label for="{{stopId}}">{{stopName}}</label>
+          <label for="{{stopId}}">{{stopName}} ({{votes.length}})</label>
         </p>
       {{/each}}
       
