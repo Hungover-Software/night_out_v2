@@ -22,9 +22,9 @@ Template.login.events({
         event.preventDefault();
         
         // Get field values to pass on to signup form
-        const target = event.target;
+        /*const target = event.target;
         const email = target.email.value;
-        const password = target.password.value;
+        const password = target.password.value;*/
         
         FlowRouter.go('signup');
     },
