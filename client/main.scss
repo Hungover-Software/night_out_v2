@@ -1,5 +1,14 @@
 /* CSS declarations go here */
 
+@import '{materialize:materialize}/sass/components/color';
+
+$primary-color: color("blue-grey", "base");
+$secondary-color: color("amber", "darken-3");
+
+$link-color: color("amber", "darken-3");
+
+@import '{materialize:materialize}/sass/materialize';
+
 main.container {
     margin-bottom: 100px;
 }

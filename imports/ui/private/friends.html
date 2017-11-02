@@ -6,7 +6,7 @@
         <label for="friend_email" data-error="Invalid Email">Friend Email</label>
       </div>
       <div class="col s12">
-        <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Submit Friend Request</button>
+        <button type="submit" class="waves-effect waves-light btn col s12">Submit Friend Request</button>
       </div>
     </form>
 
@@ -20,12 +20,12 @@
       <h5>{{sender.username}} ({{sender.email}})</h5>
       <form class="col s12" id="accept">
         <div class="col s12">
-          <input type="submit" name="accept" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Accept" />
+          <input type="submit" name="accept" class="waves-effect waves-light btn col s12" value="Accept" />
         </div>
       </form>
       <form class="col s12" id="decline">
         <div class="col s12">
-          <input type="submit" name="accept" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Decline" />
+          <input type="submit" name="accept" class="waves-effect waves-light btn col s12" value="Decline" />
         </div>
       </form>
     {{/each}}
@@ -36,7 +36,7 @@
         <h5>{{friend.username}} ({{friend.email}})</h5>
         <form class="col s12" id="unfriend">
           <div class="col s12">
-            <input type="submit" name="unfriend" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Unfriend" />
+            <input type="submit" name="unfriend" class="waves-effect waves-light btn col s12" value="Unfriend" />
           </div>
         </form>
       {{/each}}
