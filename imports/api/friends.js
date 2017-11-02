@@ -1,3 +1,14 @@
+/**
+ * @summary Basic User Information (DRY)
+ * @locus Anywhere
+ * @instancename collection
+ * @class
+ * @param {String} Friends The name of the collection. 
+ * @param {String} userId
+ * @param {String} username 
+ * @param {String} email
+ */
+
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Accounts } from 'meteor/accounts-base';
 import { BasicUserInfoSchema, GetBasicUserInfo } from './basic-user-info';
