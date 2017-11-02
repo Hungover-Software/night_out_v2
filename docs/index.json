@@ -1,0 +1,1054 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "imports/.external-ecmascript.js",
+    "static": true,
+    "longname": "imports/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "imports/api/basic-user-info.js",
+    "content": "\nimport { SimpleSchema } from 'meteor/aldeed:simple-schema';\n\nexport const BasicUserInfoSchema = new SimpleSchema({\n    userId: {\n        type: String,\n        label: 'User ID',\n    },\n    username: {\n        type: String,\n        label: 'Username',\n    },\n    email: {\n        type: String,\n        label: 'Email',\n    },\n});\n\nexport const GetBasicUserInfo = function(userId) {\n  let userEntry = Meteor.users.findOne({_id: userId});\n\n  return {\n    userId: userEntry._id,\n    username: userEntry.username,\n    email: userEntry.emails[0].address,\n  };\n};\n",
+    "static": true,
+    "longname": "/home/ubuntu/workspace/night_out/imports/api/basic-user-info.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "variable",
+    "name": "BasicUserInfoSchema",
+    "memberof": "imports/api/basic-user-info.js",
+    "static": true,
+    "longname": "imports/api/basic-user-info.js~BasicUserInfoSchema",
+    "access": "public",
+    "export": true,
+    "importPath": "night_out/imports/api/basic-user-info.js",
+    "importStyle": "{BasicUserInfoSchema}",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 50,
+    "kind": "function",
+    "name": "GetBasicUserInfo",
+    "memberof": "imports/api/basic-user-info.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "imports/api/basic-user-info.js~GetBasicUserInfo",
+    "access": "public",
+    "export": true,
+    "importPath": "night_out/imports/api/basic-user-info.js",
+    "importStyle": "{GetBasicUserInfo}",
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "params": [
+      {
+        "name": "userId",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"userId\": *, \"username\": *, \"email\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 51,
+    "kind": "file",
+    "name": "imports/api/events.js",
+    "content": "import { SimpleSchema } from 'meteor/aldeed:simple-schema';\nimport { Random } from 'meteor/random';\n\nimport { BasicUserInfoSchema, GetBasicUserInfo } from './basic-user-info';\n\nexport const Events = new Mongo.Collection('events');\n\nif (Meteor.isServer) {\n  // This code only runs on the server\n  // Only publish tasks that are public or belong to the current user\n    Meteor.publish('events', function tasksPublication() {\n        return Events.find({\n            $or: [\n                {creator_ID: Meteor.userId()},\n                {'invitees.userId': {$in: [Meteor.userId()]} },\n                {'attendees.userId': {$in: [Meteor.userId()]} }\n            ]\n        });\n    });\n}\n\nvar stopHelperSchema = new SimpleSchema({\n    stopId: {\n        type: String,\n        label: 'catId',\n        autoValue: function() {\n            if (!this.isSet) {\n                return Random.id();\n            }\n        }\n    },\n    stopUser: {\n        type: BasicUserInfoSchema,\n        label: 'Suggestor',\n    },\n    stopName: {\n        type: String,\n        label: 'Stop Name',\n    },\n    votes: {\n        type: [String],\n        label: 'UserIds for votes'\n    }\n});\n\nvar categoryHelperSchema = new SimpleSchema({\n    catId: {\n        type: String,\n        label: 'catId',\n        autoValue: function() {\n            if (!this.isSet) {\n                return Random.id();\n            }\n        }\n    },\n    catName: {\n        type: String,\n        label: 'Category Name',\n    },\n    order: {\n        type: SimpleSchema.Integer,\n        label: 'Order',\n\n    },\n    stop: {\n        type: [stopHelperSchema],\n        label: 'Stop',\n        optional : true,\n    },\n\n});\n\nvar commentSchema = new SimpleSchema({\n    username: {\n        type: String,\n        label: 'Commenter',\n    },\n    comment: {\n        type: String,\n        label: 'Comment',\n    },\n    timestamp: {\n        type: Date,\n        label: 'Timestamp',\n    },\n});\n\nvar eventSchema = new SimpleSchema({\n    creator_ID: {\n        type: String,\n        label: 'Creator ID',\n    },\n    event_name: {\n        type: String,\n        label: 'Event Name',\n        max: 20,\n    },\n    event_date: {\n        type: Date,\n        label: 'Event Date and Time',\n    },\n    invitees: {\n        type: [BasicUserInfoSchema],\n        label: 'Invitees',\n    },\n    attendees: {\n        type: [BasicUserInfoSchema],\n        label: 'Atendees',\n    },\n    categories:{\n        type: [categoryHelperSchema],\n        label: 'Categories',\n    },\n    comments: {\n        type: [commentSchema],\n        label: 'Comments',\n    },\n});\n\nEvents.attachSchema(eventSchema);\n\nMeteor.methods({\n    'events.insert'(event_name, event_date, invitees, categories) {\n\n        if (! this.userId) {\n            throw new Meteor.Error('not-authorized');\n        }\n\n        Events.insert({\n            creator_ID: this.userId,\n            event_name: event_name,\n            event_date: event_date,\n            invitees: invitees,\n            attendees: [],\n            categories: categories,\n            comments: [],\n        });\n    },\n    'events.remove'(eventId) {\n        const event = Events.findOne(eventId);\n\n        if (event.creator_ID !== this.userId) {\n          // If the task is private, make sure only the owner can delete it\n          throw new Meteor.Error('not-authorized');\n        }\n\n        Events.remove(eventId);\n    },\n\n    'event.comment' (eventId, message) {\n        if (! this.userId) {\n            throw new Meteor.Error('not-authorized');\n        }\n\n        let event = Events.findOne({_id: eventId});\n        if (event == null) {\n            throw new Meteor.Error('Event with given ID doens\\'t exist');\n        }\n\n        let comment = {\n            username: Meteor.user().username,\n            comment: message,\n            timestamp: Date.now(),\n        }\n\n        Events.update({_id: eventId}, {$push: {'comments': comment}});\n\n        return {success: true};\n    },\n    'event.addStop' (eventId, catId, stopName) {\n        if (! this.userId) {\n            throw new Meteor.Error('not-authorized');\n        }\n        \n        let event = Events.findOne({_id: eventId});\n        if (event == null) {\n            throw new Meteor.Error('Event with given ID doens\\'t exist');\n        }\n        \n        let stop = {\n            stopUser: GetBasicUserInfo(Meteor.userId()),\n            stopName: stopName,\n            votes: [],\n        }\n        \n        Events.update({_id: eventId, 'categories.catId': catId}, {$push: {'categories.$.stop': stop}});\n    },\n    'event.changeVote' (eventId, catId, stopId) {\n        if (! this.userId) {\n            throw new Meteor.Error('not-authorized');\n        }\n        \n        let event = Events.findOne({_id: eventId});\n        if (event == null) {\n            throw new Meteor.Error('Event with given ID doens\\'t exist');\n        }\n        \n        let stopArray;\n        \n        for (let category of event.categories) {\n            if (category.catId === catId) {\n                stopArray = category.stop;\n                for (let stop of stopArray) {\n                    for (let i=0; i < stop.votes.length; i++) {\n                        if (stop.votes[i] === this.userId) {\n                            stop.votes.splice(i, 1);\n                        }\n                    }\n                    if (stop.stopId === stopId) {\n                        stop.votes.push(this.userId);\n                    }\n                }\n            }\n        }\n        \n        Events.update({_id: eventId, 'categories.catId': catId}, {$set: {'categories.$.stop': stopArray}});\n    },\n});",
+    "static": true,
+    "longname": "/home/ubuntu/workspace/night_out/imports/api/events.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 52,
+    "kind": "variable",
+    "name": "Events",
+    "memberof": "imports/api/events.js",
+    "static": true,
+    "longname": "imports/api/events.js~Events",
+    "access": "public",
+    "export": true,
+    "importPath": "night_out/imports/api/events.js",
+    "importStyle": "{Events}",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "variable",
+    "name": "stopHelperSchema",
+    "memberof": "imports/api/events.js",
+    "static": true,
+    "longname": "imports/api/events.js~stopHelperSchema",
+    "access": "public",
+    "export": false,
+    "importPath": "night_out/imports/api/events.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 54,
+    "kind": "variable",
+    "name": "categoryHelperSchema",
+    "memberof": "imports/api/events.js",
+    "static": true,
+    "longname": "imports/api/events.js~categoryHelperSchema",
+    "access": "public",
+    "export": false,
+    "importPath": "night_out/imports/api/events.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 46,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 55,
+    "kind": "variable",
+    "name": "commentSchema",
+    "memberof": "imports/api/events.js",
+    "static": true,
+    "longname": "imports/api/events.js~commentSchema",
+    "access": "public",
+    "export": false,
+    "importPath": "night_out/imports/api/events.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 73,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 56,
+    "kind": "variable",
+    "name": "eventSchema",
+    "memberof": "imports/api/events.js",
+    "static": true,
+    "longname": "imports/api/events.js~eventSchema",
+    "access": "public",
+    "export": false,
+    "importPath": "night_out/imports/api/events.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 88,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 57,
+    "kind": "file",
+    "name": "imports/api/friends.js",
+    "content": "/**\n * @summary Basic User Information (DRY)\n * @locus Anywhere\n * @instancename collection\n * @class\n * @param {String} Friends The name of the collection. \n * @param {String} userId\n * @param {String} username \n * @param {String} email\n */\n\nimport { SimpleSchema } from 'meteor/aldeed:simple-schema';\nimport { Accounts } from 'meteor/accounts-base';\nimport { BasicUserInfoSchema, GetBasicUserInfo } from './basic-user-info';\n\nexport const Friends = new Mongo.Collection('friends');\nexport const FriendRequests = new Mongo.Collection('friend-requests');\n\nif (Meteor.isServer) {\n    // This code only runs on the server\n    // Only publish tasks that are public or belong to the current user\n    Meteor.publish('friends', function tasksPublication() {\n        return Friends.find({userId: this.userId});\n    });\n    Meteor.publish('friendRequests', function tasksPublication() {\n        return FriendRequests.find({$or: [{'sender.userId': this.userId}, {'receiver.userId': this.userId}] });\n    });\n\n    Meteor.methods({\n        'friendRequests.insert'(friend_email) {\n\n            // User must be logged in\n            if (! this.userId) {\n                throw new Meteor.Error('not-authorized');\n            }\n\n            // Try to find the user the email belongs to, error if no user\n            let friend = Meteor.users.find({\"emails.address\": friend_email}).fetch()[0];\n\n            if ( friend == null ) {\n                throw new Meteor.Error('friendRequests.insert.no-user', 'User with given email doesn\\'t exist');\n            }\n\n            // Don't let the user add themself.\n            if ( this.userId === friend._id ) {\n                throw new Meteor.Error('friendRequests.insert.add-self', 'You can\\'t add yourself as a friend');\n            }\n\n            // Don't let the user send multiple requests\n            let sentFriendRequest = FriendRequests.findOne({'receiver.userId': friend._id});\n\n            if ( sentFriendRequest != null ) {\n                throw new Meteor.Error('friendRequests.insert.already-sent', 'Friend request already sent to user');\n            }\n\n            // Search to see if they are already friends!\n            if ( Friends.find({$and: [{userId: this.userId},{\"friends.friend.userId\":friend._id}] }).count() > 0 ) {\n                throw new Meteor.Error('friendRequests.insert.already-friends', 'You are already friends with this person');\n            }\n\n            // If the user tries to send a request to someone who already requested friendship, just make them friends.\n            let receivedFriendRequest = FriendRequests.findOne({$and: [{'sender.userId': friend._id}, {'receiver.userId': this.userId}] });\n\n            if ( receivedFriendRequest != null ) {\n                Meteor.call('friendRequests.accept', receivedFriendRequest._id);\n                return {success: true};\n            }\n\n            FriendRequests.insert({\n                sender: GetBasicUserInfo(this.userId),\n                receiver: GetBasicUserInfo(friend._id),\n                sentDate: new Date(),\n            });\n\n            return {success: true};\n        },\n\n        'friendRequests.accept'(requestId) {\n\n            // User must be logged in\n            if (! this.userId) {\n                throw new Meteor.Error('not-authorized');\n            }\n\n            // Grab the friend request to pull information from it later\n            let request = FriendRequests.findOne({_id: requestId});\n\n            // Grab this person's friends list, creating a new one if the entry doesn't exist\n            let myFriendsList = Friends.findOne({userId: this.userId});\n            let myFriendsListId = \"\";\n\n            if ( myFriendsList == null ) {\n                myFriendsListId = Friends.insert({userId: this.userId, friends: [] });\n            } else {\n                myFriendsListId = myFriendsList._id;\n            }\n\n            // Grab the sender's friends list, creating a new one if the entry doesn't exist\n            let senderFriendsList = Friends.findOne({userId: request.sender.userId});\n            let senderFriendsListId = \"\";\n\n            if ( senderFriendsList == null ) {\n                senderFriendsListId = Friends.insert({userId: request.sender.userId, friends: [] });\n            } else {\n                senderFriendsListId = senderFriendsList._id;\n            }\n\n            let otherUserId = Meteor.users.findOne({_id: request.sender.userId})._id;\n\n            // Add to this user's friends list\n            Friends.update({_id: myFriendsListId}, {\n                $push: {\n                    \"friends\": {\n                        friend: GetBasicUserInfo(otherUserId),\n                        acceptedDate: new Date(),\n                    }\n                }\n            });\n\n            // Add to the other user's friends list\n            Friends.update({_id: senderFriendsListId}, {\n                $push: {\n                    \"friends\": {\n                        friend: GetBasicUserInfo(this.userId),\n                        acceptedDate: new Date(),\n                    }\n                }\n            });\n\n            // Remove the friend request\n            FriendRequests.remove({_id: request._id});\n\n            return {success: true};\n        },\n\n        'friendRequests.decline'(requestId) {\n\n            // User must be logged in\n            if (! this.userId) {\n                throw new Meteor.Error('not-authorized');\n            }\n\n            FriendRequests.remove({_id: requestId});\n\n            return {success: true};\n        },\n\n        'friends.unfriend'(friendId) {\n            // User must be logged in\n            if (! this.userId) {\n                throw new Meteor.Error('not-authorized');\n            }\n\n            // Remove the IDs of each person from each one's friends list\n            Friends.update({userId: this.userId}, {$pull: {\"friends\": {'friend.userId': friendId}}});\n            Friends.update({userId: friendId}, {$pull: {\"friends\": {'friend.userId': this.userId}}});\n\n            return {success: true};\n        }\n    });\n}\n\nvar friendsHelperSchema = new SimpleSchema({\n    friend: {\n        type: BasicUserInfoSchema,\n        label: 'Friend Info',\n    },\n    acceptedDate: {\n        type: String,\n        label: 'Accepted Date',\n    },\n});\n\nvar friendsSchema = new SimpleSchema({\n    userId: {\n        type: String,\n        label: 'User ID',\n    },\n    friends: {\n        type: [friendsHelperSchema],\n        label: 'Friends List',\n    },\n});\n\nFriends.attachSchema(friendsSchema);\n\nvar friendRequestSchema = new SimpleSchema({\n    sender: {\n        type: BasicUserInfoSchema,\n        label: 'Sender ID',\n    },\n    receiver: {\n        type: BasicUserInfoSchema,\n        label: 'Receiver ID',\n    },\n    sentDate: {\n        type: Date,\n        label: 'Sent Date',\n    },\n});\n\nFriendRequests.attachSchema(friendRequestSchema);\n",
+    "static": true,
+    "longname": "/home/ubuntu/workspace/night_out/imports/api/friends.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 58,
+    "kind": "variable",
+    "name": "Friends",
+    "memberof": "imports/api/friends.js",
+    "static": true,
+    "longname": "imports/api/friends.js~Friends",
+    "access": "public",
+    "export": true,
+    "importPath": "night_out/imports/api/friends.js",
+    "importStyle": "{Friends}",
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 59,
+    "kind": "variable",
+    "name": "FriendRequests",
+    "memberof": "imports/api/friends.js",
+    "static": true,
+    "longname": "imports/api/friends.js~FriendRequests",
+    "access": "public",
+    "export": true,
+    "importPath": "night_out/imports/api/friends.js",
+    "importStyle": "{FriendRequests}",
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 60,
+    "kind": "variable",
+    "name": "friendsHelperSchema",
+    "memberof": "imports/api/friends.js",
+    "static": true,
+    "longname": "imports/api/friends.js~friendsHelperSchema",
+    "access": "public",
+    "export": false,
+    "importPath": "night_out/imports/api/friends.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 163,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 61,
+    "kind": "variable",
+    "name": "friendsSchema",
+    "memberof": "imports/api/friends.js",
+    "static": true,
+    "longname": "imports/api/friends.js~friendsSchema",
+    "access": "public",
+    "export": false,
+    "importPath": "night_out/imports/api/friends.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 174,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 62,
+    "kind": "variable",
+    "name": "friendRequestSchema",
+    "memberof": "imports/api/friends.js",
+    "static": true,
+    "longname": "imports/api/friends.js~friendRequestSchema",
+    "access": "public",
+    "export": false,
+    "importPath": "night_out/imports/api/friends.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 187,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 63,
+    "kind": "file",
+    "name": "imports/api/groups.js",
+    "content": "import { SimpleSchema } from 'meteor/aldeed:simple-schema';\n\nexport const Group = new Mongo.Collection('groups');\n\nvar groupSchema = new SimpleSchema({\n    userId: {\n        type: String,\n        label: 'User ID',\n    },\n    groupName: {\n        type: String,\n        label: 'Group Name',\n    },\n    friends: [{\n        userId: {\n            type: String,\n            label: 'User ID',\n        },\n    }],\n});\n\nGroup.attachSchema(groupSchema);",
+    "static": true,
+    "longname": "/home/ubuntu/workspace/night_out/imports/api/groups.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 64,
+    "kind": "variable",
+    "name": "Group",
+    "memberof": "imports/api/groups.js",
+    "static": true,
+    "longname": "imports/api/groups.js~Group",
+    "access": "public",
+    "export": true,
+    "importPath": "night_out/imports/api/groups.js",
+    "importStyle": "{Group}",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 65,
+    "kind": "variable",
+    "name": "groupSchema",
+    "memberof": "imports/api/groups.js",
+    "static": true,
+    "longname": "imports/api/groups.js~groupSchema",
+    "access": "public",
+    "export": false,
+    "importPath": "night_out/imports/api/groups.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 66,
+    "kind": "file",
+    "name": "imports/ui/layouts/layout.js",
+    "content": "import './layout.html';\n\nimport '../public/navbar.js';\nimport '../public/login.js';\nimport '../public/signup.js';\n\nimport '../private/navbar.js';\nimport '../private/landing.js';\nimport '../private/friends.js';\nimport '../private/event.js';\nimport '../private/event_new.js';\n",
+    "static": true,
+    "longname": "/home/ubuntu/workspace/night_out/imports/ui/layouts/layout.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 67,
+    "kind": "file",
+    "name": "imports/ui/private/event.js",
+    "content": "import './event.html';\nimport { FlowRouter } from 'meteor/kadira:flow-router';\n\nimport {Events} from '../../api/events.js';\n\nTemplate.event.onCreated(function() {\n    Meteor.subscribe('events');\n    console.log(FlowRouter.getParam('_id'));\n});\n\nTemplate.comment_modal.onRendered(function() {\n  $('.modal').modal();\n});\n\nTemplate.event.helpers({\n  getEvent() {\n    return Events.find({_id: FlowRouter.getParam('_id')});\n  },\n  isChecked(votes) {\n    for (let vote of votes) {\n      if (vote === Meteor.userId()) {\n        return 'checked';\n      }\n    }\n    return '';\n  }\n});\n\nTemplate.event.events({\n  'submit #comment'(event) {\n    event.preventDefault();\n\n    const target = event.target;\n    const comment = target.comment.value;\n\n    if (comment.length > 0) {\n      Meteor.call('event.comment', FlowRouter.getParam('_id'), comment);\n    }\n    \n    target.comment.value = '';\n  },\n  'submit .addStop'(event) {\n    event.preventDefault();\n    \n    const target = event.target;\n    const stopName = target.stopName.value;\n    const catId = target.catId.value;\n    \n    Meteor.call('event.addStop', FlowRouter.getParam('_id'), catId, stopName);\n    \n    target.stopName.value = '';\n  },\n  'change input[type=\"radio\"]'(event) {\n    const target = event.target;\n    const catId = target.name;\n    const stopId = target.id;\n    \n    Meteor.call('event.changeVote', FlowRouter.getParam('_id'), catId, stopId);\n  },\n});\n",
+    "static": true,
+    "longname": "/home/ubuntu/workspace/night_out/imports/ui/private/event.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 68,
+    "kind": "file",
+    "name": "imports/ui/private/event_new.js",
+    "content": "import { Session } from 'meteor/session';\n\nimport './event_new.html';\n\nimport { Events } from '../../api/events.js';\nimport { Friends } from '../../api/friends.js';\n\nTemplate.event_new.onCreated(function() {\n    Meteor.subscribe('events');\n    Meteor.subscribe('friends');\n});\n\nTemplate.categories.onCreated(function() {\n  Session.set('catInputCount', 0);\n  Session.set('catInputs', []); // on page load, set this to have no inputs\n});\n\nTemplate.categories.onRendered(function() {\n    $('#addCategory').click();\n});\n\nTemplate.event_new.onRendered(function() {\n    $('.datepicker').pickadate({\n        selectMonths: true, // Creates a dropdown to control month\n        selectYears: 15, // Creates a dropdown of 15 years to control year,\n        today: 'Today',\n        clear: 'Clear',\n        close: 'Ok',\n        closeOnSelect: false // Close upon selecting a date,\n    });\n    \n    $('.timepicker').pickatime({\n        default: 'now', // Set default time: 'now', '1:30AM', '16:30'\n        fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')\n        twelvehour: true, // Use AM/PM or 24-hour format\n        donetext: 'OK', // text for done-button\n        cleartext: 'Clear', // text for clear-button\n        canceltext: 'Cancel', // Text for cancel-button\n        autoclose: false, // automatic close timepicker\n        ampmclickable: true, // make AM PM clickable\n        aftershow: function(){}, //Function for after opening timepicker\n        format: 'HH:MM',\n    });\n    \n    $('.modal').modal();\n});\n\nTemplate.categories.helpers({\n  inputs: function() {\n    return Session.get('catInputs'); // reactively watches the Session variable, so when it changes, this result will change and our template will change\n  }\n});\n\nTemplate.categories.events({\n  'click #addCategory': function() {\n    var inputs = Session.get('catInputs');\n    var uniqid = Session.get('catInputCount')\n    inputs.push({ uniqid: uniqid, value: \"\" });\n    Session.set('catInputCount', ++uniqid);\n    Session.set('catInputs', inputs);\n  }\n});\n\nfunction convert12to24(timeStr) {\n    var meridian = timeStr.substr(timeStr.length-2).toLowerCase();;\n    var hours =  timeStr.substr(0, timeStr.indexOf(':'));\n    var minutes = timeStr.substring(timeStr.indexOf(':')+1, timeStr.indexOf(':')+3);\n    if (meridian=='pm')\n    {\n        if (hours!=12)\n        {\n            hours=parseInt(hours)+12;\n        }\n    }\n    else {\n        if (hours == 12) {\n            hours = '00';\n        }\n    }\n\n    return hours+':'+minutes;\n}\n\nTemplate.event_new.helpers({\n    friendGroup() {\n        \n        return [{name: 'test'}];\n    },\n    \n    friendList(){\n        return Friends.find();\n    },\n});\n\nTemplate.event_new.events({\n    'submit #new'(event) {\n        event.preventDefault();\n        \n        const target = event.target;\n        const eventName = target.event_name.value;\n        const eventDate = target.event_date.value;\n        const eventTime = target.event_time.value;\n        \n        const combinedDate = eventDate + ' ' + convert12to24(eventTime);\n        \n        let invitees = [];\n        \n        $('#invitees li').each(function(index, value) {\n            invitees.push({\n                userId: value.dataset.id,\n                username: value.dataset.email,\n                email: value.innerHTML,\n            });\n        });\n        \n        const catInputs = Session.get('catInputs');\n        var categories = [];\n        \n        $.each(catInputs, function(i, e) {\n            categories.push({\n                catName: e.value,\n                order: e.uniqid,\n                stop: [],\n            });\n        });\n        \n        Meteor.call('events.insert', eventName, new Date(combinedDate), invitees, categories);\n        \n        FlowRouter.go('home');\n    },\n    \n    'change #friends input'(event) {\n        const target = event.target;\n        \n        if (target.checked) {\n            $('#invitees').append('<li id=\"inv-' + target.id + '\" data-email=\"' + target.dataset.email + '\" data-id=\"' + target.id + '\">' + target.value + '</li>');\n        } else {\n            $('#inv-' + target.id).remove();\n        }\n        \n    },\n});\n\nTemplate.category.events({\n  'click .remove-input': function(event) {\n    var uniqid = $(event.currentTarget).attr('uniqid');\n    var inputs = Session.get('catInputs');\n    inputs = _.filter(inputs, function(x) { return x.uniqid != uniqid; });\n    Session.set('catInputs', inputs);\n  },\n  'change input': function(event) {\n    var $input = $(event.currentTarget);\n    var uniqid = $input.attr('uniqid');\n    var inputs = Session.get('catInputs');\n    index = inputs.findIndex(function(x) { return x.uniqid == uniqid; });\n    inputs[index].value = $input.val();\n    Session.set('catInputs', inputs);\n  }\n});",
+    "static": true,
+    "longname": "/home/ubuntu/workspace/night_out/imports/ui/private/event_new.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 69,
+    "kind": "function",
+    "name": "convert12to24",
+    "memberof": "imports/ui/private/event_new.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "imports/ui/private/event_new.js~convert12to24",
+    "access": "public",
+    "export": false,
+    "importPath": "night_out/imports/ui/private/event_new.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 64,
+    "undocument": true,
+    "params": [
+      {
+        "name": "timeStr",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 70,
+    "kind": "file",
+    "name": "imports/ui/private/friends.js",
+    "content": "import './friends.html';\n\nimport {Friends, FriendRequests} from '../../api/friends.js';\n\nTemplate.friends.onCreated(function() {\n    Meteor.subscribe('friends');\n    Meteor.subscribe('friendRequests');\n    console.log(FriendRequests.find().count());\n});\n\nTemplate.friends.helpers({\n  friendsList() {\n    return Friends.find();\n  },\n\n  sentFriendRequestsList() {\n    return FriendRequests.find({'sender.userId': Meteor.userId()});\n  },\n\n  receivedFriendRequestsList() {\n    return FriendRequests.find({'receiver.userId': Meteor.userId()});\n  },\n})\n\nTemplate.friends.events({\n  'submit #request'(event) {\n    event.preventDefault();\n\n    const target = event.target;\n    const email = target.friend_email.value;\n\n    Meteor.call('friendRequests.insert', email);\n  },\n\n  'submit #decline'(event) {\n    event.preventDefault();\n\n    Meteor.call('friendRequests.decline', this._id);\n  },\n\n  'submit #accept'(event) {\n    event.preventDefault();\n\n    Meteor.call('friendRequests.accept', this._id);\n  },\n\n  'submit #unfriend'(event) {\n    event.preventDefault();\n\n    Meteor.call('friends.unfriend', this.friend.userId);\n  }\n})",
+    "static": true,
+    "longname": "/home/ubuntu/workspace/night_out/imports/ui/private/friends.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 71,
+    "kind": "file",
+    "name": "imports/ui/private/landing.js",
+    "content": "import './landing.html';\n\nimport {Events} from '../../api/events.js';\n\nTemplate.landing.onCreated(function() {\n    Meteor.subscribe('events');\n});\n\nTemplate.landing.helpers({\n    eventList(){\n        return Events.find();\n    },\n});\n",
+    "static": true,
+    "longname": "/home/ubuntu/workspace/night_out/imports/ui/private/landing.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 72,
+    "kind": "file",
+    "name": "imports/ui/private/navbar.js",
+    "content": "/** test description */\n\nimport { FlowRouter } from 'meteor/kadira:flow-router';\n\nimport './navbar.html';\n\nTemplate.privateNavbar.onRendered(function() {\n    $(\".button-collapse\").sideNav({\n        closeOnClick: true,\n    });\n});\n\nTemplate.privateNavbar.events({\n    'click .logout'(event) {\n        event.preventDefault();\n        \n        Meteor.logout(function() {\n            FlowRouter.go('login');\n        });\n    },\n});",
+    "static": true,
+    "longname": "/home/ubuntu/workspace/night_out/imports/ui/private/navbar.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 73,
+    "kind": "file",
+    "name": "imports/ui/public/login.js",
+    "content": "import { FlowRouter } from 'meteor/kadira:flow-router';\n\nimport './login.html';\n\nTemplate.login.events({\n    'submit #signin'(event) {\n        // Stop page from reloading\n        event.preventDefault();\n        \n        // Get values from the target event\n        const target = event.target;\n        const email = target.email.value;\n        const password = target.password.value;\n        \n        //Authenticate user and send user to landing page on success\n        Meteor.loginWithPassword(email, password, function() {\n            FlowRouter.go('home');\n        });\n    },\n    'click #signup'(event) {\n        // Stop page from reloading\n        event.preventDefault();\n        \n        // Get field values to pass on to signup form\n        const target = event.target;\n        const email = target.email.value;\n        const password = target.password.value;\n        \n        FlowRouter.go('signup');\n    },\n});",
+    "static": true,
+    "longname": "/home/ubuntu/workspace/night_out/imports/ui/public/login.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 74,
+    "kind": "file",
+    "name": "imports/ui/public/navbar.js",
+    "content": "import { FlowRouter } from 'meteor/kadira:flow-router';\n\nimport './navbar.html';\n\nTemplate.publicNavbar.onRendered(function() {\n    $(\".button-collapse\").sideNav({\n        closeOnClick: true,\n    });\n});\n\nTemplate.publicNavbar.events({\n    'click .logout'(event) {\n        event.preventDefault();\n        \n        Meteor.logout(function() {\n            FlowRouter.go('login');\n        });\n    },\n});",
+    "static": true,
+    "longname": "/home/ubuntu/workspace/night_out/imports/ui/public/navbar.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 75,
+    "kind": "file",
+    "name": "imports/ui/public/signup.js",
+    "content": "import { FlowRouter } from 'meteor/kadira:flow-router';\n\nimport './signup.html';\n\nTemplate.signup.events({\n    'submit #signup'(event) {\n        // Stop page from reloading\n        event.preventDefault();\n\n        // Get values from the target event\n        const target = event.target;\n        const email = target.email.value;\n        const username = target.username.value;\n        const password = target.password.value;\n        const passwordConf = target.passwordConf.value;\n\n        if (password != passwordConf) {\n            throw new Meteor.Error('passwords-do-not-match', 'Passwords do not match.')\n        }\n\n        if (password.length < 5) {\n            throw new Meteor.Error('password-too-short', 'Use a longer password.');\n        }\n\n        // Create a new user in the database\n        Accounts.createUser({\n            email: email,\n            username: username,\n            password: password,\n        },\n        // On success the user is logged in and redirected to landing page\n        function() {\n            FlowRouter.go('home');\n        });\n    },\n});",
+    "static": true,
+    "longname": "/home/ubuntu/workspace/night_out/imports/ui/public/signup.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "kind": "index",
+    "content": "# night_out_v2\n\nVersion 2 of our Night Out event planning application",
+    "longname": "/home/ubuntu/workspace/night_out/README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n  \"name\": \"night_out\",\n  \"private\": true,\n  \"scripts\": {\n    \"start\": \"meteor run\"\n  },\n  \"dependencies\": {\n    \"babel-runtime\": \"^6.26.0\",\n    \"bcrypt\": \"^1.0.3\",\n    \"meteor-node-stubs\": \"~0.2.4\"\n  },\n  \"devDependencies\": {\n    \"esdoc\": \"^1.0.3\",\n    \"esdoc-standard-plugin\": \"^1.0.0\"\n  }\n}\n",
+    "longname": "/home/ubuntu/workspace/night_out/package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]

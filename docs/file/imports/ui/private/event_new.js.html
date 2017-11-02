@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">imports/ui/private/event_new.js | night_out</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#api">api</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-GetBasicUserInfo">GetBasicUserInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BasicUserInfoSchema">BasicUserInfoSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Events">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FriendRequests">FriendRequests</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Friends">Friends</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Group">Group</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">imports/ui/private/event_new.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Session } from &apos;meteor/session&apos;;
+
+import &apos;./event_new.html&apos;;
+
+import { Events } from &apos;../../api/events.js&apos;;
+import { Friends } from &apos;../../api/friends.js&apos;;
+
+Template.event_new.onCreated(function() {
+    Meteor.subscribe(&apos;events&apos;);
+    Meteor.subscribe(&apos;friends&apos;);
+});
+
+Template.categories.onCreated(function() {
+  Session.set(&apos;catInputCount&apos;, 0);
+  Session.set(&apos;catInputs&apos;, []); // on page load, set this to have no inputs
+});
+
+Template.categories.onRendered(function() {
+    $(&apos;#addCategory&apos;).click();
+});
+
+Template.event_new.onRendered(function() {
+    $(&apos;.datepicker&apos;).pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15, // Creates a dropdown of 15 years to control year,
+        today: &apos;Today&apos;,
+        clear: &apos;Clear&apos;,
+        close: &apos;Ok&apos;,
+        closeOnSelect: false // Close upon selecting a date,
+    });
+    
+    $(&apos;.timepicker&apos;).pickatime({
+        default: &apos;now&apos;, // Set default time: &apos;now&apos;, &apos;1:30AM&apos;, &apos;16:30&apos;
+        fromnow: 0,       // set default time to * milliseconds from now (using with default = &apos;now&apos;)
+        twelvehour: true, // Use AM/PM or 24-hour format
+        donetext: &apos;OK&apos;, // text for done-button
+        cleartext: &apos;Clear&apos;, // text for clear-button
+        canceltext: &apos;Cancel&apos;, // Text for cancel-button
+        autoclose: false, // automatic close timepicker
+        ampmclickable: true, // make AM PM clickable
+        aftershow: function(){}, //Function for after opening timepicker
+        format: &apos;HH:MM&apos;,
+    });
+    
+    $(&apos;.modal&apos;).modal();
+});
+
+Template.categories.helpers({
+  inputs: function() {
+    return Session.get(&apos;catInputs&apos;); // reactively watches the Session variable, so when it changes, this result will change and our template will change
+  }
+});
+
+Template.categories.events({
+  &apos;click #addCategory&apos;: function() {
+    var inputs = Session.get(&apos;catInputs&apos;);
+    var uniqid = Session.get(&apos;catInputCount&apos;)
+    inputs.push({ uniqid: uniqid, value: &quot;&quot; });
+    Session.set(&apos;catInputCount&apos;, ++uniqid);
+    Session.set(&apos;catInputs&apos;, inputs);
+  }
+});
+
+function convert12to24(timeStr) {
+    var meridian = timeStr.substr(timeStr.length-2).toLowerCase();;
+    var hours =  timeStr.substr(0, timeStr.indexOf(&apos;:&apos;));
+    var minutes = timeStr.substring(timeStr.indexOf(&apos;:&apos;)+1, timeStr.indexOf(&apos;:&apos;)+3);
+    if (meridian==&apos;pm&apos;)
+    {
+        if (hours!=12)
+        {
+            hours=parseInt(hours)+12;
+        }
+    }
+    else {
+        if (hours == 12) {
+            hours = &apos;00&apos;;
+        }
+    }
+
+    return hours+&apos;:&apos;+minutes;
+}
+
+Template.event_new.helpers({
+    friendGroup() {
+        
+        return [{name: &apos;test&apos;}];
+    },
+    
+    friendList(){
+        return Friends.find();
+    },
+});
+
+Template.event_new.events({
+    &apos;submit #new&apos;(event) {
+        event.preventDefault();
+        
+        const target = event.target;
+        const eventName = target.event_name.value;
+        const eventDate = target.event_date.value;
+        const eventTime = target.event_time.value;
+        
+        const combinedDate = eventDate + &apos; &apos; + convert12to24(eventTime);
+        
+        let invitees = [];
+        
+        $(&apos;#invitees li&apos;).each(function(index, value) {
+            invitees.push({
+                userId: value.dataset.id,
+                username: value.dataset.email,
+                email: value.innerHTML,
+            });
+        });
+        
+        const catInputs = Session.get(&apos;catInputs&apos;);
+        var categories = [];
+        
+        $.each(catInputs, function(i, e) {
+            categories.push({
+                catName: e.value,
+                order: e.uniqid,
+                stop: [],
+            });
+        });
+        
+        Meteor.call(&apos;events.insert&apos;, eventName, new Date(combinedDate), invitees, categories);
+        
+        FlowRouter.go(&apos;home&apos;);
+    },
+    
+    &apos;change #friends input&apos;(event) {
+        const target = event.target;
+        
+        if (target.checked) {
+            $(&apos;#invitees&apos;).append(&apos;&lt;li id=&quot;inv-&apos; + target.id + &apos;&quot; data-email=&quot;&apos; + target.dataset.email + &apos;&quot; data-id=&quot;&apos; + target.id + &apos;&quot;&gt;&apos; + target.value + &apos;&lt;/li&gt;&apos;);
+        } else {
+            $(&apos;#inv-&apos; + target.id).remove();
+        }
+        
+    },
+});
+
+Template.category.events({
+  &apos;click .remove-input&apos;: function(event) {
+    var uniqid = $(event.currentTarget).attr(&apos;uniqid&apos;);
+    var inputs = Session.get(&apos;catInputs&apos;);
+    inputs = _.filter(inputs, function(x) { return x.uniqid != uniqid; });
+    Session.set(&apos;catInputs&apos;, inputs);
+  },
+  &apos;change input&apos;: function(event) {
+    var $input = $(event.currentTarget);
+    var uniqid = $input.attr(&apos;uniqid&apos;);
+    var inputs = Session.get(&apos;catInputs&apos;);
+    index = inputs.findIndex(function(x) { return x.uniqid == uniqid; });
+    inputs[index].value = $input.val();
+    Session.set(&apos;catInputs&apos;, inputs);
+  }
+});</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.3)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
