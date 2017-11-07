@@ -10,37 +10,45 @@
     <!--{{#each attendees}}
       <p>{{username}}</p>
     {{/each}} -->
-    <h3>Categories</h3>
-    {{#each categories}}
-      <h4>{{catName}}</h4>
-      <form class="addStop">
-        <div class="row valign-wrapper">
-          <div class="input-field col s8 m6">
-            <input name="stopName" type="text" class="validate" />
-            <label for="stopName">Add Stop</label>
-            <input type="hidden" name="catId" value="{{catId}}" />
+    {{#if locked}}
+      {{> locked_event}}
+    {{else}}
+      {{#each categories}}
+        <h4>{{catName}}</h4>
+        <form class="addStop">
+          <div class="row valign-wrapper">
+            <div class="input-field col s8 m6">
+              <input name="stopName" type="text" class="validate" />
+              <label for="stopName">Add Stop</label>
+              <input type="hidden" name="catId" value="{{catId}}" />
+            </div>
+            <div class="col s4 m6">
+              <button type="submit" class="btn-flat"><i class="material-icons green-text" style="font-size:50px;">add</i></button>
+            </div>
           </div>
-          <div class="col s4 m6">
-            <button type="submit" class="btn-flat"><i class="material-icons green-text" style="font-size:50px;">add</i></button>
-          </div>
-        </div>
-      </form>
-      {{#each stop}}
-        <p>
-          <input name="{{../catId}}" type="radio" id="{{stopId}}" {{isChecked votes}}/>
-          <label for="{{stopId}}">{{stopName}} ({{votes.length}})</label>
-        </p>
+        </form>
+        {{#each stop}}
+          <p>
+            <input name="{{../catId}}" type="radio" id="{{stopId}}" {{isChecked votes}}/>
+            <label for="{{stopId}}">{{stopName}} ({{votes.length}})</label>
+          </p>
+        {{/each}}
       {{/each}}
-      
-    {{/each}}
+    {{/if}}
     
+    {{#if userIsOwner creator_ID}}
+      <form id="lock" class="row">
+        <button type="submit" class="waves-effect waves-light btn col s12">{{#if locked}}Unlock{{else}}Lock{{/if}} Event</button>
+      </form>
+    {{/if}}
+
     <!-- Modal Trigger -->
     <a class="modal-trigger comment-modal-trigger" href="#comment-modal">
       <footer class="page-footer blue-grey lighten-2">
         <h5>Comment<i class="material-icons medium">arrow_drop_up</i></h5>
       </footer>
     </a>
-    
+
     {{> comment_modal}}
   {{/each}}
 </template>
@@ -62,5 +70,22 @@
         </div>
       </form>
     </div>
+  </div>
+</template>
+
+<template name="locked_event">
+  <div class="row">
+  {{#each categories}}
+    <div class="col s12 m6">
+      <div class="card-panel">
+        <h4>{{catName}}</h4>
+        {{#each stop}}
+          {{#if selected}}
+            <p>{{stopName}} - {{votes.length}} Vote(s)</p>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+  {{/each}}
   </div>
 </template>

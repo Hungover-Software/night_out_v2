@@ -43,5 +43,5 @@ if (Meteor.isServer && Meteor.isDevelopment) {
         });
       }
     }
-  })
+  });
 }

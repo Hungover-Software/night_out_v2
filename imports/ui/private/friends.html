@@ -41,4 +41,50 @@
         </form>
       {{/each}}
     {{/each}}
+
+    {{> groups}}
+</template>
+
+<template name="groups">
+  <form class="col s12" id="new_group">
+      <div class="input-field col s12">
+        <input type="text" name="group_name" class="validate" />
+        <label for="group_name">Group Name</label>
+      </div>
+      <div class="col s12">
+        <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Create Group</button>
+      </div>
+    </form>
+    {{#each groupsList}}
+      {{> group }}
+    {{/each}}
+</template>
+
+<template name="group">
+  <h4>{{groupName}}</h4>
+  <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Add Friends to Group</a>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h5>Friends</h5>
+      <ul id="friends">
+        {{#each friendsList}}
+          {{#each friends}}
+            <li>
+              <input type="checkbox" class="filled-in" id="{{friend.userId}}" value="{{friend.username}}" data-email="{{friend.email}}"/>
+              <label for="{{friend.userId}}">{{friend.username}} ({{friend.email}})</label>
+            </li>
+          {{/each}}
+        {{/each}}
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Add</a>
+    </div>
+  </div>
+  {{#each friends}}
+    <p>{{friend.username}}</p>
+  {{/each}}
 </template>
