@@ -18,24 +18,28 @@
       <p>{{username}}</p>
     {{/each}} -->
     <h5>Categories</h5>
-    {{#each categories}}
-      <p>{{catName}}</p>
-      <h7>Stops</h7>
-      <form class="addStop">
-        <div class="input-field col s6">
-          <input name="stopName" type="text" class="validate" />
-          <label for="stopName">Add Stop</label>
-          <input type="hidden" name="catId" value="{{catId}}" />
-          <div class="col s6">
-            <button type="submit" class="btn-flat"><i class="material-icons green-text" style="font-size:50px;">add</i></button>
+    {{#if locked}}
+      {{> locked_event}}
+    {{else}}
+      {{#each categories}}
+        <p>{{catName}}</p>
+        <h7>Stops</h7>
+        <form class="addStop">
+          <div class="input-field col s6">
+            <input name="stopName" type="text" class="validate" />
+            <label for="stopName">Add Stop</label>
+            <input type="hidden" name="catId" value="{{catId}}" />
+            <div class="col s6">
+              <button type="submit" class="btn-flat"><i class="material-icons green-text" style="font-size:50px;">add</i></button>
+            </div>
           </div>
-        </div>
-      </form>
-      {{#each stop}}
-        {{stopName}}
+        </form>
+        {{#each stop}}
+          {{stopName}}
+        {{/each}}
+  
       {{/each}}
-
-    {{/each}}
+    {{/if}}
 
     <!-- Modal Trigger -->
     <a class="modal-trigger comment-modal-trigger" href="#comment-modal">
@@ -69,5 +73,13 @@
 </template>
 
 <template name="locked_event">
-
+  <div class="row">
+  {{#each categories}}
+    <div class="col s12 m6">
+      <div class="card-panel">
+        <h2>{{catName}}</h2>
+      </div>
+    </div>
+  {{/each}}
+  </div>
 </template>
