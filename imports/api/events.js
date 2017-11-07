@@ -40,7 +40,11 @@ var stopHelperSchema = new SimpleSchema({
     votes: {
         type: [String],
         label: 'UserIds for votes'
-    }
+    },
+    selected: {
+        type: Boolean,
+        label: 'Stop Selected',
+    },
 });
 
 var categoryHelperSchema = new SimpleSchema({
@@ -181,8 +185,32 @@ Meteor.methods({
         if (event == null) {
             throw new Meteor.Error('Event with given ID doesn\'t exist');
         }
-
+        
         Events.update({_id: eventId}, {$set: {'locked': !event.locked}});
+        
+        if (!event.locked) {
+            for (let category of event.categories) {
+                let mostVotes = 0;
+                let index = [];
+                for (let i=0; i < category.stop.length; i++) {
+                    category.stop[i].selected = false;
+                    if (index.length === 0 || mostVotes < category.stop[i].votes.length) {
+                        index = [i];
+                        mostVotes = category.stop[i].votes.length;
+                      } else if (mostVotes === category.stop[i].votes.length) {
+                        index.push(i);
+                      } else {
+                        continue;
+                      }
+                }
+                if (index.length > 1) {
+                  console.log(index);
+                  category.stop[Random.choice(index)].selected = true;
+                }
+            }
+            
+            Events.update({_id: eventId}, {$set: {'categories': event.categories}});
+        }
 
         return {success: true};
     },

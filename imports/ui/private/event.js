@@ -1,5 +1,6 @@
 import './event.html';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Random } from 'meteor/random';
 
 import {Events} from '../../api/events.js';
 
