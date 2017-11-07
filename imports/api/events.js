@@ -204,8 +204,9 @@ Meteor.methods({
                       }
                 }
                 if (index.length > 1) {
-                  console.log(index);
                   category.stop[Random.choice(index)].selected = true;
+                } else if (index.length === 1) {
+                    category.stop[index[0]].selected = true;
                 }
             }
             
