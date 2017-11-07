@@ -1,43 +1,45 @@
 <template name="event">
   {{#each getEvent}}
-
     {{#if userIsOwner creator_ID}}
       <form id="lock">
         <button type="submit" class="waves-effect waves-light btn col s12">{{#if locked}}Unlock{{else}}Lock{{/if}} Event</button>
       </form>
     {{/if}}
 
-    <h5>{{event_name}}</h5>
+    <h2>{{event_name}}</h2>
     <!--<p>{{creator_ID}}</p>-->
     <p>{{event_date}}</p>
-    <h5>Invitees</h5>
+    <h3>Invitees</h3>
     {{#each invitees}}
       <p>{{username}}</p>
     {{/each}}
     <!--{{#each attendees}}
       <p>{{username}}</p>
     {{/each}} -->
-    <h5>Categories</h5>
+    <h3>Categories</h3>
     {{#if locked}}
       {{> locked_event}}
     {{else}}
       {{#each categories}}
-        <p>{{catName}}</p>
-        <h7>Stops</h7>
+        <h4>{{catName}}</h4>
         <form class="addStop">
-          <div class="input-field col s6">
-            <input name="stopName" type="text" class="validate" />
-            <label for="stopName">Add Stop</label>
-            <input type="hidden" name="catId" value="{{catId}}" />
-            <div class="col s6">
+          <div class="row valign-wrapper">
+            <div class="input-field col s8 m6">
+              <input name="stopName" type="text" class="validate" />
+              <label for="stopName">Add Stop</label>
+              <input type="hidden" name="catId" value="{{catId}}" />
+            </div>
+            <div class="col s4 m6">
               <button type="submit" class="btn-flat"><i class="material-icons green-text" style="font-size:50px;">add</i></button>
             </div>
           </div>
         </form>
         {{#each stop}}
-          {{stopName}}
+          <p>
+            <input name="{{../catId}}" type="radio" id="{{stopId}}" {{isChecked votes}}/>
+            <label for="{{stopId}}">{{stopName}} ({{votes.length}})</label>
+          </p>
         {{/each}}
-  
       {{/each}}
     {{/if}}
 
