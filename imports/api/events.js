@@ -115,6 +115,10 @@ var eventSchema = new SimpleSchema({
         type: [commentSchema],
         label: 'Comments',
     },
+    locked: {
+        type: Boolean,
+        label: 'Voting period is done!',
+    },
 });
 
 Events.attachSchema(eventSchema);
@@ -133,6 +137,7 @@ Meteor.methods({
             invitees: invitees,
             attendees: [],
             categories: categories,
+            locked: false,
             comments: [],
         });
     },
@@ -167,22 +172,40 @@ Meteor.methods({
 
         return {success: true};
     },
+    'event.lock'(eventId) {
+        if (! this.userId) {
+            throw new Meteor.Error('not-authorized');
+        }
+
+        let event = Events.findOne({_id: eventId});
+        if (event == null) {
+            throw new Meteor.Error('Event with given ID doesn\'t exist');
+        }
+
+        Events.update({_id: eventId}, {$set: {'locked': !event.locked}});
+
+        return {success: true};
+    },
     'event.addStop' (eventId, catId, stopName) {
         if (! this.userId) {
             throw new Meteor.Error('not-authorized');
         }
-        
+
         let event = Events.findOne({_id: eventId});
         if (event == null) {
             throw new Meteor.Error('Event with given ID doens\'t exist');
         }
-        
+
+        if (event.locked === true) {
+            throw new Meteor.Error('Event is locked, changes can no longer be made');
+        }
+
         let stop = {
             stopUser: GetBasicUserInfo(Meteor.userId()),
             stopName: stopName,
             votes: [],
         }
-        
+
         Events.update({_id: eventId, 'categories.catId': catId}, {$push: {'categories.$.stop': stop}});
     },
 });

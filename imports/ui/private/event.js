@@ -5,7 +5,6 @@ import {Events} from '../../api/events.js';
 
 Template.event.onCreated(function() {
     Meteor.subscribe('events');
-    console.log(FlowRouter.getParam('_id'));
 });
 
 Template.comment_modal.onRendered(function() {
@@ -15,8 +14,10 @@ Template.comment_modal.onRendered(function() {
 Template.event.helpers({
   getEvent() {
     return Events.find({_id: FlowRouter.getParam('_id')});
-  }
-
+  },
+  userIsOwner(creator_ID) {
+    return creator_ID === Meteor.userId();
+  },
 });
 
 Template.event.events({
@@ -29,18 +30,23 @@ Template.event.events({
     if (comment.length > 0) {
       Meteor.call('event.comment', FlowRouter.getParam('_id'), comment);
     }
-    
+
     target.comment.value = '';
+  },
+  'submit #lock'(event) {
+    event.preventDefault();
+
+    Meteor.call('event.lock', FlowRouter.getParam('_id'));
   },
   'submit .addStop'(event) {
     event.preventDefault();
-    
+
     const target = event.target;
     const stopName = target.stopName.value;
     const catId = target.catId.value;
-    
+
     Meteor.call('event.addStop', FlowRouter.getParam('_id'), catId, stopName);
-    
+
     target.stopName.value = '';
   },
 });

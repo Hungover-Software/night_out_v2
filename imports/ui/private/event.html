@@ -1,5 +1,12 @@
 <template name="event">
   {{#each getEvent}}
+
+    {{#if userIsOwner creator_ID}}
+      <form id="lock">
+        <button type="submit" class="waves-effect waves-light btn col s12">{{#if locked}}Unlock{{else}}Lock{{/if}} Event</button>
+      </form>
+    {{/if}}
+
     <h5>{{event_name}}</h5>
     <!--<p>{{creator_ID}}</p>-->
     <p>{{event_date}}</p>
@@ -25,18 +32,18 @@
         </div>
       </form>
       {{#each stop}}
-        {{stopName}}  
+        {{stopName}}
       {{/each}}
-      
+
     {{/each}}
-    
+
     <!-- Modal Trigger -->
     <a class="modal-trigger comment-modal-trigger" href="#comment-modal">
       <footer class="page-footer blue-grey lighten-2">
         <h5>Comment<i class="material-icons medium">arrow_drop_up</i></h5>
       </footer>
     </a>
-    
+
     {{> comment_modal}}
   {{/each}}
 </template>
@@ -59,4 +66,8 @@
       </form>
     </div>
   </div>
+</template>
+
+<template name="locked_event">
+
 </template>
