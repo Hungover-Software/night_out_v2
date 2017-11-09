@@ -1,11 +1,11 @@
 import './friends.html';
 
 import {Friends, FriendRequests} from '../../api/friends.js';
+import {Groups} from '../../api/groups.js';
 
 Template.friends.onCreated(function() {
     Meteor.subscribe('friends');
     Meteor.subscribe('friendRequests');
-    console.log(FriendRequests.find().count());
 });
 
 Template.friends.helpers({
@@ -20,7 +20,7 @@ Template.friends.helpers({
   receivedFriendRequestsList() {
     return FriendRequests.find({'receiver.userId': Meteor.userId()});
   },
-})
+});
 
 Template.friends.events({
   'submit #request'(event) {
@@ -48,5 +48,52 @@ Template.friends.events({
     event.preventDefault();
 
     Meteor.call('friends.unfriend', this.friend.userId);
+  },
+});
+
+Template.groups.onCreated(function () {
+  Meteor.subscribe('groups');
+  Meteor.subscribe('friends');
+});
+
+Template.group.onRendered(function() {
+    $('.modal').modal();
+});
+
+Template.groups.helpers({
+  groupsList() {
+    return Groups.find();
+  },
+  friendsList() {
+    return Friends.find();
   }
-})
+});
+
+Template.groups.events({
+  'submit #new_group'(event) {
+    event.preventDefault();
+
+    const target = event.target;
+    const groupName = target.group_name.value;
+
+    Meteor.call('groups.newGroup', groupName);
+  },
+
+  'submit #add_group_member'(event) {
+
+  },
+});
+
+Template.group.onCreated(function () {
+  Meteor.subscribe('friends');
+});
+
+Template.group.onRendered(function() {
+    $('.modal').modal();
+});
+
+Template.group.helpers({
+  friendsList() {
+    return Friends.find();
+  }
+});

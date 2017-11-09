@@ -1,5 +1,14 @@
 /* CSS declarations go here */
 
+@import '{materialize:materialize}/sass/components/color';
+
+$primary-color: color("blue-grey", "base");
+$secondary-color: color("amber", "darken-3");
+
+$link-color: color("amber", "darken-3");
+
+@import '{materialize:materialize}/sass/materialize';
+
 main.container {
     margin-bottom: 100px;
 }
@@ -10,6 +19,7 @@ main.container {
     right: 0;
     left: 0;
     padding: 0;
+    z-index: 2;
 }
 
 .comment-modal-trigger h5 {

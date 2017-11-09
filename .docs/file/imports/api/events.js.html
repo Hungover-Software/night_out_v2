@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">imports/api/events.js | night_out</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#api">api</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-GetBasicUserInfo">GetBasicUserInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BasicUserInfoSchema">BasicUserInfoSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Events">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FriendRequests">FriendRequests</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Friends">Friends</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Group">Group</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">imports/api/events.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { SimpleSchema } from &apos;meteor/aldeed:simple-schema&apos;;
+import { Random } from &apos;meteor/random&apos;;
+
+import { BasicUserInfoSchema, GetBasicUserInfo } from &apos;./basic-user-info&apos;;
+
+export const Events = new Mongo.Collection(&apos;events&apos;);
+
+if (Meteor.isServer) {
+  // This code only runs on the server
+  // Only publish tasks that are public or belong to the current user
+    Meteor.publish(&apos;events&apos;, function tasksPublication() {
+        return Events.find({
+            $or: [
+                {creator_ID: Meteor.userId()},
+                {&apos;invitees.userId&apos;: {$in: [Meteor.userId()]} },
+                {&apos;attendees.userId&apos;: {$in: [Meteor.userId()]} }
+            ]
+        });
+    });
+}
+
+var stopHelperSchema = new SimpleSchema({
+    stopId: {
+        type: String,
+        label: &apos;catId&apos;,
+        autoValue: function() {
+            if (!this.isSet) {
+                return Random.id();
+            }
+        }
+    },
+    stopUser: {
+        type: BasicUserInfoSchema,
+        label: &apos;Suggestor&apos;,
+    },
+    stopName: {
+        type: String,
+        label: &apos;Stop Name&apos;,
+    },
+    votes: {
+        type: [String],
+        label: &apos;UserIds for votes&apos;
+    }
+});
+
+var categoryHelperSchema = new SimpleSchema({
+    catId: {
+        type: String,
+        label: &apos;catId&apos;,
+        autoValue: function() {
+            if (!this.isSet) {
+                return Random.id();
+            }
+        }
+    },
+    catName: {
+        type: String,
+        label: &apos;Category Name&apos;,
+    },
+    order: {
+        type: SimpleSchema.Integer,
+        label: &apos;Order&apos;,
+
+    },
+    stop: {
+        type: [stopHelperSchema],
+        label: &apos;Stop&apos;,
+        optional : true,
+    },
+
+});
+
+var commentSchema = new SimpleSchema({
+    username: {
+        type: String,
+        label: &apos;Commenter&apos;,
+    },
+    comment: {
+        type: String,
+        label: &apos;Comment&apos;,
+    },
+    timestamp: {
+        type: Date,
+        label: &apos;Timestamp&apos;,
+    },
+});
+
+var eventSchema = new SimpleSchema({
+    creator_ID: {
+        type: String,
+        label: &apos;Creator ID&apos;,
+    },
+    event_name: {
+        type: String,
+        label: &apos;Event Name&apos;,
+        max: 20,
+    },
+    event_date: {
+        type: Date,
+        label: &apos;Event Date and Time&apos;,
+    },
+    invitees: {
+        type: [BasicUserInfoSchema],
+        label: &apos;Invitees&apos;,
+    },
+    attendees: {
+        type: [BasicUserInfoSchema],
+        label: &apos;Atendees&apos;,
+    },
+    categories:{
+        type: [categoryHelperSchema],
+        label: &apos;Categories&apos;,
+    },
+    comments: {
+        type: [commentSchema],
+        label: &apos;Comments&apos;,
+    },
+});
+
+Events.attachSchema(eventSchema);
+
+Meteor.methods({
+    &apos;events.insert&apos;(event_name, event_date, invitees, categories) {
+
+        if (! this.userId) {
+            throw new Meteor.Error(&apos;not-authorized&apos;);
+        }
+
+        Events.insert({
+            creator_ID: this.userId,
+            event_name: event_name,
+            event_date: event_date,
+            invitees: invitees,
+            attendees: [],
+            categories: categories,
+            comments: [],
+        });
+    },
+    &apos;events.remove&apos;(eventId) {
+        const event = Events.findOne(eventId);
+
+        if (event.creator_ID !== this.userId) {
+          // If the task is private, make sure only the owner can delete it
+          throw new Meteor.Error(&apos;not-authorized&apos;);
+        }
+
+        Events.remove(eventId);
+    },
+
+    &apos;event.comment&apos; (eventId, message) {
+        if (! this.userId) {
+            throw new Meteor.Error(&apos;not-authorized&apos;);
+        }
+
+        let event = Events.findOne({_id: eventId});
+        if (event == null) {
+            throw new Meteor.Error(&apos;Event with given ID doens\&apos;t exist&apos;);
+        }
+
+        let comment = {
+            username: Meteor.user().username,
+            comment: message,
+            timestamp: Date.now(),
+        }
+
+        Events.update({_id: eventId}, {$push: {&apos;comments&apos;: comment}});
+
+        return {success: true};
+    },
+    &apos;event.addStop&apos; (eventId, catId, stopName) {
+        if (! this.userId) {
+            throw new Meteor.Error(&apos;not-authorized&apos;);
+        }
+        
+        let event = Events.findOne({_id: eventId});
+        if (event == null) {
+            throw new Meteor.Error(&apos;Event with given ID doens\&apos;t exist&apos;);
+        }
+        
+        let stop = {
+            stopUser: GetBasicUserInfo(Meteor.userId()),
+            stopName: stopName,
+            votes: [],
+        }
+        
+        Events.update({_id: eventId, &apos;categories.catId&apos;: catId}, {$push: {&apos;categories.$.stop&apos;: stop}});
+    },
+    &apos;event.changeVote&apos; (eventId, catId, stopId) {
+        if (! this.userId) {
+            throw new Meteor.Error(&apos;not-authorized&apos;);
+        }
+        
+        let event = Events.findOne({_id: eventId});
+        if (event == null) {
+            throw new Meteor.Error(&apos;Event with given ID doens\&apos;t exist&apos;);
+        }
+        
+        let stopArray;
+        
+        for (let category of event.categories) {
+            if (category.catId === catId) {
+                stopArray = category.stop;
+                for (let stop of stopArray) {
+                    for (let i=0; i &lt; stop.votes.length; i++) {
+                        if (stop.votes[i] === this.userId) {
+                            stop.votes.splice(i, 1);
+                        }
+                    }
+                    if (stop.stopId === stopId) {
+                        stop.votes.push(this.userId);
+                    }
+                }
+            }
+        }
+        
+        Events.update({_id: eventId, &apos;categories.catId&apos;: catId}, {$set: {&apos;categories.$.stop&apos;: stopArray}});
+    },
+});</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.3)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

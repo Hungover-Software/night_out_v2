@@ -6,7 +6,7 @@
         <label for="friend_email" data-error="Invalid Email">Friend Email</label>
       </div>
       <div class="col s12">
-        <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Submit Friend Request</button>
+        <button type="submit" class="waves-effect waves-light btn col s12">Submit Friend Request</button>
       </div>
     </form>
 
@@ -20,12 +20,12 @@
       <h5>{{sender.username}} ({{sender.email}})</h5>
       <form class="col s12" id="accept">
         <div class="col s12">
-          <input type="submit" name="accept" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Accept" />
+          <input type="submit" name="accept" class="waves-effect waves-light btn col s12" value="Accept" />
         </div>
       </form>
       <form class="col s12" id="decline">
         <div class="col s12">
-          <input type="submit" name="accept" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Decline" />
+          <input type="submit" name="accept" class="waves-effect waves-light btn col s12" value="Decline" />
         </div>
       </form>
     {{/each}}
@@ -36,9 +36,55 @@
         <h5>{{friend.username}} ({{friend.email}})</h5>
         <form class="col s12" id="unfriend">
           <div class="col s12">
-            <input type="submit" name="unfriend" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Unfriend" />
+            <input type="submit" name="unfriend" class="waves-effect waves-light btn col s12" value="Unfriend" />
           </div>
         </form>
       {{/each}}
     {{/each}}
+
+    {{> groups}}
+</template>
+
+<template name="groups">
+  <form class="col s12" id="new_group">
+      <div class="input-field col s12">
+        <input type="text" name="group_name" class="validate" />
+        <label for="group_name">Group Name</label>
+      </div>
+      <div class="col s12">
+        <button type="submit" class="waves-effect waves-light btn col s12">Create Group</button>
+      </div>
+    </form>
+    {{#each groupsList}}
+      {{> group }}
+    {{/each}}
+</template>
+
+<template name="group">
+  <h4>{{groupName}}</h4>
+  <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Add Friends to Group</a>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h5>Friends</h5>
+      <ul id="friends">
+        {{#each friendsList}}
+          {{#each friends}}
+            <li>
+              <input type="checkbox" class="filled-in" id="{{friend.userId}}" value="{{friend.username}}" data-email="{{friend.email}}"/>
+              <label for="{{friend.userId}}">{{friend.username}} ({{friend.email}})</label>
+            </li>
+          {{/each}}
+        {{/each}}
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Add</a>
+    </div>
+  </div>
+  {{#each friends}}
+    <p>{{friend.username}}</p>
+  {{/each}}
 </template>

@@ -1,0 +1,52 @@
+{
+  "coverage": "0%",
+  "expectCount": 15,
+  "actualCount": 0,
+  "files": {
+    "imports/api/basic-user-info.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        18
+      ]
+    },
+    "imports/api/events.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        6,
+        22,
+        46,
+        73,
+        88
+      ]
+    },
+    "imports/api/friends.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        5,
+        6,
+        152,
+        163,
+        176
+      ]
+    },
+    "imports/api/groups.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        5
+      ]
+    },
+    "imports/ui/private/event_new.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        64
+      ]
+    }
+  }
+}

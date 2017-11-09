@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">imports/api/friends.js | night_out</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#api">api</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-GetBasicUserInfo">GetBasicUserInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BasicUserInfoSchema">BasicUserInfoSchema</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Events">Events</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FriendRequests">FriendRequests</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Friends">Friends</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Group">Group</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">imports/api/friends.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { SimpleSchema } from &apos;meteor/aldeed:simple-schema&apos;;
+import { Accounts } from &apos;meteor/accounts-base&apos;;
+import { BasicUserInfoSchema, GetBasicUserInfo } from &apos;./basic-user-info&apos;;
+
+export const Friends = new Mongo.Collection(&apos;friends&apos;);
+export const FriendRequests = new Mongo.Collection(&apos;friend-requests&apos;);
+
+if (Meteor.isServer) {
+    // This code only runs on the server
+    // Only publish tasks that are public or belong to the current user
+    Meteor.publish(&apos;friends&apos;, function tasksPublication() {
+        return Friends.find({userId: this.userId});
+    });
+    Meteor.publish(&apos;friendRequests&apos;, function tasksPublication() {
+        return FriendRequests.find({$or: [{&apos;sender.userId&apos;: this.userId}, {&apos;receiver.userId&apos;: this.userId}] });
+    });
+
+    Meteor.methods({
+        &apos;friendRequests.insert&apos;(friend_email) {
+
+            // User must be logged in
+            if (! this.userId) {
+                throw new Meteor.Error(&apos;not-authorized&apos;);
+            }
+
+            // Try to find the user the email belongs to, error if no user
+            let friend = Meteor.users.find({&quot;emails.address&quot;: friend_email}).fetch()[0];
+
+            if ( friend == null ) {
+                throw new Meteor.Error(&apos;friendRequests.insert.no-user&apos;, &apos;User with given email doesn\&apos;t exist&apos;);
+            }
+
+            // Don&apos;t let the user add themself.
+            if ( this.userId === friend._id ) {
+                throw new Meteor.Error(&apos;friendRequests.insert.add-self&apos;, &apos;You can\&apos;t add yourself as a friend&apos;);
+            }
+
+            // Don&apos;t let the user send multiple requests
+            let sentFriendRequest = FriendRequests.findOne({&apos;receiver.userId&apos;: friend._id});
+
+            if ( sentFriendRequest != null ) {
+                throw new Meteor.Error(&apos;friendRequests.insert.already-sent&apos;, &apos;Friend request already sent to user&apos;);
+            }
+
+            // Search to see if they are already friends!
+            if ( Friends.find({$and: [{userId: this.userId},{&quot;friends.friend.userId&quot;:friend._id}] }).count() &gt; 0 ) {
+                throw new Meteor.Error(&apos;friendRequests.insert.already-friends&apos;, &apos;You are already friends with this person&apos;);
+            }
+
+            // If the user tries to send a request to someone who already requested friendship, just make them friends.
+            let receivedFriendRequest = FriendRequests.findOne({$and: [{&apos;sender.userId&apos;: friend._id}, {&apos;receiver.userId&apos;: this.userId}] });
+
+            if ( receivedFriendRequest != null ) {
+                Meteor.call(&apos;friendRequests.accept&apos;, receivedFriendRequest._id);
+                return {success: true};
+            }
+
+            FriendRequests.insert({
+                sender: GetBasicUserInfo(this.userId),
+                receiver: GetBasicUserInfo(friend._id),
+                sentDate: new Date(),
+            });
+
+            return {success: true};
+        },
+
+        &apos;friendRequests.accept&apos;(requestId) {
+
+            // User must be logged in
+            if (! this.userId) {
+                throw new Meteor.Error(&apos;not-authorized&apos;);
+            }
+
+            // Grab the friend request to pull information from it later
+            let request = FriendRequests.findOne({_id: requestId});
+
+            // Grab this person&apos;s friends list, creating a new one if the entry doesn&apos;t exist
+            let myFriendsList = Friends.findOne({userId: this.userId});
+            let myFriendsListId = &quot;&quot;;
+
+            if ( myFriendsList == null ) {
+                myFriendsListId = Friends.insert({userId: this.userId, friends: [] });
+            } else {
+                myFriendsListId = myFriendsList._id;
+            }
+
+            // Grab the sender&apos;s friends list, creating a new one if the entry doesn&apos;t exist
+            let senderFriendsList = Friends.findOne({userId: request.sender.userId});
+            let senderFriendsListId = &quot;&quot;;
+
+            if ( senderFriendsList == null ) {
+                senderFriendsListId = Friends.insert({userId: request.sender.userId, friends: [] });
+            } else {
+                senderFriendsListId = senderFriendsList._id;
+            }
+
+            let otherUserId = Meteor.users.findOne({_id: request.sender.userId})._id;
+
+            // Add to this user&apos;s friends list
+            Friends.update({_id: myFriendsListId}, {
+                $push: {
+                    &quot;friends&quot;: {
+                        friend: GetBasicUserInfo(otherUserId),
+                        acceptedDate: new Date(),
+                    }
+                }
+            });
+
+            // Add to the other user&apos;s friends list
+            Friends.update({_id: senderFriendsListId}, {
+                $push: {
+                    &quot;friends&quot;: {
+                        friend: GetBasicUserInfo(this.userId),
+                        acceptedDate: new Date(),
+                    }
+                }
+            });
+
+            // Remove the friend request
+            FriendRequests.remove({_id: request._id});
+
+            return {success: true};
+        },
+
+        &apos;friendRequests.decline&apos;(requestId) {
+
+            // User must be logged in
+            if (! this.userId) {
+                throw new Meteor.Error(&apos;not-authorized&apos;);
+            }
+
+            FriendRequests.remove({_id: requestId});
+
+            return {success: true};
+        },
+
+        &apos;friends.unfriend&apos;(friendId) {
+            // User must be logged in
+            if (! this.userId) {
+                throw new Meteor.Error(&apos;not-authorized&apos;);
+            }
+
+            // Remove the IDs of each person from each one&apos;s friends list
+            Friends.update({userId: this.userId}, {$pull: {&quot;friends&quot;: {&apos;friend.userId&apos;: friendId}}});
+            Friends.update({userId: friendId}, {$pull: {&quot;friends&quot;: {&apos;friend.userId&apos;: this.userId}}});
+
+            return {success: true};
+        }
+    });
+}
+
+var friendsHelperSchema = new SimpleSchema({
+    friend: {
+        type: BasicUserInfoSchema,
+        label: &apos;Friend Info&apos;,
+    },
+    acceptedDate: {
+        type: String,
+        label: &apos;Accepted Date&apos;,
+    },
+});
+
+var friendsSchema = new SimpleSchema({
+    userId: {
+        type: String,
+        label: &apos;User ID&apos;,
+    },
+    friends: {
+        type: [friendsHelperSchema],
+        label: &apos;Friends List&apos;,
+    },
+});
+
+Friends.attachSchema(friendsSchema);
+
+var friendRequestSchema = new SimpleSchema({
+    sender: {
+        type: BasicUserInfoSchema,
+        label: &apos;Sender ID&apos;,
+    },
+    receiver: {
+        type: BasicUserInfoSchema,
+        label: &apos;Receiver ID&apos;,
+    },
+    sentDate: {
+        type: Date,
+        label: &apos;Sent Date&apos;,
+    },
+});
+
+FriendRequests.attachSchema(friendRequestSchema);
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.3)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
