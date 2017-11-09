@@ -233,6 +233,7 @@ Meteor.methods({
             stopUser: GetBasicUserInfo(Meteor.userId()),
             stopName: stopName,
             votes: [],
+            selected: false,
         }
 
         Events.update({_id: eventId, 'categories.catId': catId}, {$push: {'categories.$.stop': stop}});
