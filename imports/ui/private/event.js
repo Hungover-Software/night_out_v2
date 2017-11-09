@@ -45,7 +45,17 @@ Template.event.events({
   'submit #lock'(event) {
     event.preventDefault();
 
-    Meteor.call('event.lock', FlowRouter.getParam('_id'));
+    $('.card-panel.category').addClass('scale-out');
+    
+    Meteor.setTimeout(function() {
+      Meteor.call('event.lock', FlowRouter.getParam('_id'), (error, result) => {
+        Meteor.setTimeout(function() {
+          $('.card-panel.category').removeClass('scale-out');
+        }, 200);
+      });
+    }, 100);
+    
+    
   },
   'submit .addStop'(event) {
     event.preventDefault();
