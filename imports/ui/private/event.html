@@ -3,42 +3,61 @@
     <h2>{{event_name}}</h2>
     <!--<p>{{creator_ID}}</p>-->
     <p>{{event_date}}</p>
-    <h3>Invitees</h3>
-    {{#each invitees}}
-      <p>{{username}}</p>
-    {{/each}}
+    <div class="row">
+      <div class="col s12">
+        <div class="card-panel">
+          <h3>Invitees</h3>
+          {{#each invitees}}
+            <p>{{username}}</p>
+          {{/each}}
+        </div>
+      </div>
+    </div>
     <!--{{#each attendees}}
       <p>{{username}}</p>
     {{/each}} -->
-    {{#if locked}}
-      {{> locked_event}}
-    {{else}}
+    
+    <div class="row">
       {{#each categories}}
-        <h4>{{catName}}</h4>
-        <form class="addStop">
-          <div class="row valign-wrapper">
-            <div class="input-field col s8 m6">
-              <input name="stopName" type="text" class="validate" />
-              <label for="stopName">Add Stop</label>
-              <input type="hidden" name="catId" value="{{catId}}" />
-            </div>
-            <div class="col s4 m6">
-              <button type="submit" class="btn-flat"><i class="material-icons green-text" style="font-size:50px;">add</i></button>
-            </div>
+        <div class="col s12 {{#if ../locked}}m6{{/if}}">
+          <div class="card-panel category scale-transition">
+            <h4>{{catName}}</h4>
+            {{#if ../locked}}
+              {{#each stop}}
+                {{#if selected}}
+                  <p>{{stopName}} - {{votes.length}} Vote(s)</p>
+                {{/if}}
+              {{/each}}
+            {{else}}
+              <form class="addStop">
+                <div class="row valign-wrapper">
+                  <div class="input-field col s8 m6">
+                    <input name="stopName" type="text" class="validate" />
+                    <label for="stopName">Add Stop</label>
+                    <input type="hidden" name="catId" value="{{catId}}" />
+                  </div>
+                  <div class="col s4 m6">
+                    <button type="submit" class="btn-flat"><i class="material-icons green-text" style="font-size:50px;">add</i></button>
+                  </div>
+                </div>
+              </form>
+              {{#each stop}}
+                <p>
+                  <input name="{{../catId}}" type="radio" id="{{stopId}}" {{isChecked votes}}/>
+                  <label for="{{stopId}}">{{stopName}} ({{votes.length}})</label>
+                </p>
+              {{/each}}
+            {{/if}}
           </div>
-        </form>
-        {{#each stop}}
-          <p>
-            <input name="{{../catId}}" type="radio" id="{{stopId}}" {{isChecked votes}}/>
-            <label for="{{stopId}}">{{stopName}} ({{votes.length}})</label>
-          </p>
-        {{/each}}
+        </div>
       {{/each}}
-    {{/if}}
+    </div>
     
     {{#if userIsOwner creator_ID}}
       <form id="lock" class="row">
-        <button type="submit" class="waves-effect waves-light btn col s12">{{#if locked}}Unlock{{else}}Lock{{/if}} Event</button>
+        <div class="col s12">
+          <button type="submit" class="waves-effect waves-light btn col s12">{{#if locked}}Unlock{{else}}Lock{{/if}} Event</button>
+        </div>
       </form>
     {{/if}}
 
@@ -70,22 +89,5 @@
         </div>
       </form>
     </div>
-  </div>
-</template>
-
-<template name="locked_event">
-  <div class="row">
-  {{#each categories}}
-    <div class="col s12 m6">
-      <div class="card-panel">
-        <h4>{{catName}}</h4>
-        {{#each stop}}
-          {{#if selected}}
-            <p>{{stopName}} - {{votes.length}} Vote(s)</p>
-          {{/if}}
-        {{/each}}
-      </div>
-    </div>
-  {{/each}}
   </div>
 </template>
