@@ -31,7 +31,7 @@ if (Meteor.isServer) {
 
             // User must be logged in
             if (! this.userId) {
-                throw new Meteor.Error('not-authorized');
+                throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
             }
 
             // Try to find the user the email belongs to, error if no user
@@ -79,7 +79,7 @@ if (Meteor.isServer) {
 
             // User must be logged in
             if (! this.userId) {
-                throw new Meteor.Error('not-authorized');
+                throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
             }
 
             // Grab the friend request to pull information from it later
@@ -137,7 +137,7 @@ if (Meteor.isServer) {
 
             // User must be logged in
             if (! this.userId) {
-                throw new Meteor.Error('not-authorized');
+                throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
             }
 
             FriendRequests.remove({_id: requestId});
@@ -148,7 +148,7 @@ if (Meteor.isServer) {
         'friends.unfriend'(friendId) {
             // User must be logged in
             if (! this.userId) {
-                throw new Meteor.Error('not-authorized');
+                throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
             }
             
             let friend = Friends.findOne(

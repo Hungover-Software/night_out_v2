@@ -131,7 +131,7 @@ Meteor.methods({
     'events.insert'(event_name, event_date, invitees, categories) {
 
         if (! this.userId) {
-            throw new Meteor.Error('not-authorized');
+            throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
         }
 
         Events.insert({
@@ -150,7 +150,7 @@ Meteor.methods({
 
         if (event.creator_ID !== this.userId) {
           // If the task is private, make sure only the owner can delete it
-          throw new Meteor.Error('not-authorized');
+          throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
         }
 
         Events.remove(eventId);
@@ -158,12 +158,12 @@ Meteor.methods({
 
     'event.comment' (eventId, message) {
         if (! this.userId) {
-            throw new Meteor.Error('not-authorized');
+            throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
         }
 
         let event = Events.findOne({_id: eventId});
         if (event == null) {
-            throw new Meteor.Error('Event with given ID doens\'t exist');
+            throw new Meteor.Error('invalid-event-error', 'Event with given ID doens\'t exist');
         }
 
         let comment = {
@@ -178,12 +178,12 @@ Meteor.methods({
     },
     'event.lock'(eventId) {
         if (! this.userId) {
-            throw new Meteor.Error('not-authorized');
+            throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
         }
 
         let event = Events.findOne({_id: eventId});
         if (event == null) {
-            throw new Meteor.Error('Event with given ID doesn\'t exist');
+            throw new Meteor.Error('invalid-event-error', 'Event with given ID doesn\'t exist');
         }
         
         Events.update({_id: eventId}, {$set: {'locked': !event.locked}});
@@ -217,16 +217,20 @@ Meteor.methods({
     },
     'event.addStop' (eventId, catId, stopName) {
         if (! this.userId) {
-            throw new Meteor.Error('not-authorized');
+            throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
         }
 
         let event = Events.findOne({_id: eventId});
         if (event == null) {
-            throw new Meteor.Error('Event with given ID doens\'t exist');
+            throw new Meteor.Error('invalid-event-error', 'Event with given ID doens\'t exist');
         }
 
         if (event.locked === true) {
-            throw new Meteor.Error('Event is locked, changes can no longer be made');
+            throw new Meteor.Error('locked-event-error', 'Event is locked, changes can no longer be made');
+        }
+        
+        if (stopName === "") {
+            throw new Meteor.Error('invalid-stop-name', 'Stop name is required');
         }
 
         let stop = {
@@ -240,12 +244,12 @@ Meteor.methods({
     },
     'event.changeVote' (eventId, catId, stopId) {
         if (! this.userId) {
-            throw new Meteor.Error('not-authorized');
+            throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
         }
         
         let event = Events.findOne({_id: eventId});
         if (event == null) {
-            throw new Meteor.Error('Event with given ID doens\'t exist');
+            throw new Meteor.Error('invalid-event-error', 'Event with given ID doens\'t exist');
         }
         
         let stopArray;
