@@ -9,6 +9,18 @@ $link-color: color("blue", "darken-1");
 
 @import '{materialize:materialize}/sass/materialize';
 
+.fb-color {
+    background-color: #3b5998;
+}
+
+.btn .valign-wrapper {
+    justify-content: center;
+}
+
+.btn .fa {
+    margin-right: 15px;
+}
+
 main.container {
     margin-bottom: 100px;
 }
