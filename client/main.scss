@@ -3,9 +3,9 @@
 @import '{materialize:materialize}/sass/components/color';
 
 $primary-color: color("blue-grey", "base");
-$secondary-color: color("amber", "darken-3");
+$secondary-color: color("blue", "darken-1");
 
-$link-color: color("amber", "darken-3");
+$link-color: color("blue", "darken-1");
 
 @import '{materialize:materialize}/sass/materialize';
 
@@ -33,4 +33,8 @@ main.container {
 #comment-modal {
     max-height: none;
     height: 80%;
+}
+
+.toast .material-icons {
+    margin-right: 10px;
 }

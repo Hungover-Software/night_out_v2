@@ -1,8 +1,11 @@
-import './event.html';
+import { Materialize } from 'meteor/materialize:materialize';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Random } from 'meteor/random';
 
+import './event.html';
+
 import {Events} from '../../api/events.js';
+import { Toasts } from '../../components/toasts.js';
 
 Template.event.onCreated(function() {
     Meteor.subscribe('events');
@@ -37,7 +40,12 @@ Template.event.events({
     const comment = target.comment.value;
 
     if (comment.length > 0) {
-      Meteor.call('event.comment', FlowRouter.getParam('_id'), comment);
+      Meteor.call('event.comment', FlowRouter.getParam('_id'), comment, function(err, result) {
+        if (err) {
+          Materialize.Toast.removeAll();
+          Toasts.error(err.reason, 4000, 'error_outline');
+        }
+      });
     }
 
     target.comment.value = '';
@@ -48,7 +56,11 @@ Template.event.events({
     $('.card-panel.category').addClass('scale-out');
     
     Meteor.setTimeout(function() {
-      Meteor.call('event.lock', FlowRouter.getParam('_id'), (error, result) => {
+      Meteor.call('event.lock', FlowRouter.getParam('_id'), (err, result) => {
+        if (err) {
+          Materialize.Toast.removeAll();
+          Toasts.error(err.reason, 4000, 'error_outline');
+        }
         Meteor.setTimeout(function() {
           $('.card-panel.category').removeClass('scale-out');
         }, 200);
@@ -64,7 +76,12 @@ Template.event.events({
     const stopName = target.stopName.value;
     const catId = target.catId.value;
 
-    Meteor.call('event.addStop', FlowRouter.getParam('_id'), catId, stopName);
+    Meteor.call('event.addStop', FlowRouter.getParam('_id'), catId, stopName, function(err, result) {
+      if (err) {
+        Materialize.Toast.removeAll();
+        Toasts.error(err.reason, 4000, 'error_outline');
+      }
+    });
 
     target.stopName.value = '';
   },
@@ -73,6 +90,11 @@ Template.event.events({
     const catId = target.name;
     const stopId = target.id;
     
-    Meteor.call('event.changeVote', FlowRouter.getParam('_id'), catId, stopId);
+    Meteor.call('event.changeVote', FlowRouter.getParam('_id'), catId, stopId, function(err, result) {
+      if (err) {
+        Materialize.Toast.removeAll();
+        Toasts.error(err.reason, 4000, 'error_outline');
+      }
+    });
   },
 });

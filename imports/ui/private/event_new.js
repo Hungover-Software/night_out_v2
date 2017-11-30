@@ -1,9 +1,11 @@
 import { Session } from 'meteor/session';
+import { Materialize } from 'meteor/materialize:materialize';
 
 import './event_new.html';
 
 import { Events } from '../../api/events.js';
 import { Friends } from '../../api/friends.js';
+import { Toasts } from '../../components/toasts.js';
 
 Template.event_new.onCreated(function() {
     Meteor.subscribe('events');
@@ -124,9 +126,15 @@ Template.event_new.events({
             });
         });
         
-        Meteor.call('events.insert', eventName, new Date(combinedDate), invitees, categories);
+        Meteor.call('events.insert', eventName, new Date(combinedDate), invitees, categories, function(err, result) {
+            if (err) {
+                Materialize.Toast.removeAll();
+                Toasts.error(err.reason, Infinity, 'error_outline');
+            } else {
+                FlowRouter.go('home');
+            }
+        });
         
-        FlowRouter.go('home');
     },
     
     'change #friends input'(event) {
