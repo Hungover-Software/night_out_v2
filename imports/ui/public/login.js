@@ -36,4 +36,16 @@ Template.login.events({
         
         FlowRouter.go('signup');
     },
+    'click #fb-login'(event) {
+        Meteor.loginWithFacebook({
+          requestPermissions: ['user_friends', 'public_profile', 'email']
+        }, (err) => {
+          if (err) {
+            Materialize.Toast.removeAll();
+            Toasts.error(err.reason, Infinity, 'error_outline');
+          } else {
+            FlowRouter.go('home');
+          }
+        });
+    }
 });
