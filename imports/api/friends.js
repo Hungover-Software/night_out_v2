@@ -150,12 +150,19 @@ if (Meteor.isServer) {
             if (! this.userId) {
                 throw new Meteor.Error('not-authorized');
             }
+            
+            let friend = Friends.findOne(
+                {userId: this.userId, "friends.friend.userId": friendId}, 
+                {"friends.$.friend.userId": friendId}
+            ).friends[0].friend;
+            
+            console.log(friend);
 
             // Remove the IDs of each person from each one's friends list
             Friends.update({userId: this.userId}, {$pull: {"friends": {'friend.userId': friendId}}});
             Friends.update({userId: friendId}, {$pull: {"friends": {'friend.userId': this.userId}}});
-
-            return {success: true};
+            
+            return {success: true, friend: friend};
         }
     });
 }

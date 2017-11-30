@@ -1,7 +1,10 @@
+import { Materialize } from 'meteor/materialize:materialize';
+
 import './friends.html';
 
 import {Friends, FriendRequests} from '../../api/friends.js';
 import {Groups} from '../../api/groups.js';
+import { Toasts } from '../../components/toasts.js';
 
 Template.friends.onCreated(function() {
     Meteor.subscribe('friends');
@@ -29,25 +32,58 @@ Template.friends.events({
     const target = event.target;
     const email = target.friend_email.value;
 
-    Meteor.call('friendRequests.insert', email);
+    Meteor.call('friendRequests.insert', email, function(err, result) {
+      if (err) {
+        Materialize.Toast.removeAll();
+        Toasts.error(err.reason, Infinity, 'error_outline');
+      } else {
+        Materialize.Toast.removeAll();
+        Toasts.success('Friend Request Sent', 4000, 'mail_outline');
+        target.email.value = '';
+      }
+    });
   },
 
   'submit #decline'(event) {
     event.preventDefault();
 
-    Meteor.call('friendRequests.decline', this._id);
+    Meteor.call('friendRequests.decline', this._id, function(err, result) {
+      if (err) {
+        Materialize.Toast.removeAll();
+        Toasts.error(err.reason, Infinity, 'error_outline');
+      } else {
+        Materialize.Toast.removeAll();
+        Toasts.warn('Friend Request Declined', 4000, 'warning');
+      }
+    });
   },
 
   'submit #accept'(event) {
     event.preventDefault();
 
-    Meteor.call('friendRequests.accept', this._id);
+    Meteor.call('friendRequests.accept', this._id, function(err, result) {
+      if (err) {
+        Materialize.Toast.removeAll();
+        Toasts.error(err.reason, Infinity, 'error_outline');
+      } else {
+        Materialize.Toast.removeAll();
+        Toasts.success('Friend Request Accepted', 4000, 'mail_outline');
+      }
+    });
   },
 
   'submit #unfriend'(event) {
     event.preventDefault();
 
-    Meteor.call('friends.unfriend', this.friend.userId);
+    Meteor.call('friends.unfriend', this.friend.userId, function(err, result) {
+      if (err) {
+        Materialize.Toast.removeAll();
+        Toasts.error(err.reason, Infinity, 'error_outline');
+      } else {
+        Materialize.Toast.removeAll();
+        Toasts.warn('Unfriended ' + result.friend.username + ' (' + result.friend.email + ')', 4000, 'warning');
+      }
+    });
   },
 });
 
