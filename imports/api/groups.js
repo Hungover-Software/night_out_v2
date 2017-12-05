@@ -35,7 +35,7 @@ if (Meteor.isServer) {
             return {success: true};
         },
 
-        'groups.addGroupMembers'(groupId, friendsList) {
+        'groups.updateGroupMembers'(groupName, friendsList) {
             // User must be logged in
             if (! this.userId) {
                 throw new Meteor.Error('not-authorized');
@@ -46,9 +46,22 @@ if (Meteor.isServer) {
                 throw new Meteor.Error('Must have at least one friend');
             }
 
-            // Add the friends to the group
-            Groups.update({_id: groupId}, {$push: {'friends': friendsList}});
+            Groups.update({userId: this.userId, groupName: groupName}, {$set: {friends: friendsList}});
+
+            return {success: true};
         },
+
+        'groups.removeGroupMember'(groupId, friend) {
+            // User must be logged in
+            if (! this.userId) {
+                throw new Meteor.Error('not-authorized');
+            }
+
+            // Add the friends to the group
+            Groups.update({_id: groupId}, {$pull: {'friends': friend}});
+
+            return {success: true};
+        }
     });
 }
 
@@ -57,6 +70,7 @@ var groupSchema = new SimpleSchema({
         type: String,
         label: 'User ID',
     },
+    // MAKE UNIQUE
     groupName: {
         type: String,
         label: 'Group Name',

@@ -1,21 +1,37 @@
-import { Materialize } from 'meteor/materialize:materialize';
+import { Session } from 'meteor/session';
 
 import './friends.html';
 
 import {Friends, FriendRequests} from '../../api/friends.js';
 import {Groups} from '../../api/groups.js';
-import { Toasts } from '../../components/toasts.js';
 
-Template.friends.onCreated(function() {
+Template.friends_section.onCreated(function() {
     Meteor.subscribe('friends');
-    Meteor.subscribe('friendRequests');
 });
 
-Template.friends.helpers({
+Template.friends.onRendered(function() {
+    $('ul.tabs').tabs();
+});
+
+Template.friends_section.helpers({
   friendsList() {
     return Friends.find();
   },
+});
 
+Template.friends_section.events({
+  'click #unfriend'(event) {
+    event.preventDefault();
+
+    Meteor.call('friends.unfriend', this.friend.userId);
+  }
+})
+
+Template.friend_requests_section.onCreated(function() {
+  Meteor.subscribe('friendRequests');
+});
+
+Template.friend_requests_section.helpers({
   sentFriendRequestsList() {
     return FriendRequests.find({'sender.userId': Meteor.userId()});
   },
@@ -25,78 +41,38 @@ Template.friends.helpers({
   },
 });
 
-Template.friends.events({
+Template.friend_requests_section.events({
   'submit #request'(event) {
     event.preventDefault();
 
     const target = event.target;
     const email = target.friend_email.value;
 
-    Meteor.call('friendRequests.insert', email, function(err, result) {
-      if (err) {
-        Materialize.Toast.removeAll();
-        Toasts.error(err.reason, Infinity, 'error_outline');
-      } else {
-        Materialize.Toast.removeAll();
-        Toasts.success('Friend Request Sent', 4000, 'mail_outline');
-        target.email.value = '';
-      }
-    });
+    Meteor.call('friendRequests.insert', email);
   },
 
-  'submit #decline'(event) {
+  'click #decline'(event) {
     event.preventDefault();
 
-    Meteor.call('friendRequests.decline', this._id, function(err, result) {
-      if (err) {
-        Materialize.Toast.removeAll();
-        Toasts.error(err.reason, Infinity, 'error_outline');
-      } else {
-        Materialize.Toast.removeAll();
-        Toasts.warn('Friend Request Declined', 4000, 'warning');
-      }
-    });
+    Meteor.call('friendRequests.decline', this._id);
   },
 
-  'submit #accept'(event) {
+  'click #accept'(event) {
     event.preventDefault();
 
-    Meteor.call('friendRequests.accept', this._id, function(err, result) {
-      if (err) {
-        Materialize.Toast.removeAll();
-        Toasts.error(err.reason, Infinity, 'error_outline');
-      } else {
-        Materialize.Toast.removeAll();
-        Toasts.success('Friend Request Accepted', 4000, 'mail_outline');
-      }
-    });
-  },
-
-  'submit #unfriend'(event) {
-    event.preventDefault();
-
-    Meteor.call('friends.unfriend', this.friend.userId, function(err, result) {
-      if (err) {
-        Materialize.Toast.removeAll();
-        Toasts.error(err.reason, Infinity, 'error_outline');
-      } else {
-        Materialize.Toast.removeAll();
-        Toasts.warn('Unfriended ' + result.friend.username + ' (' + result.friend.email + ')', 4000, 'warning');
-      }
-    });
+    Meteor.call('friendRequests.accept', this._id);
   },
 });
 
-Template.groups.onCreated(function () {
+Template.groups_section.onCreated(function() {
   Meteor.subscribe('groups');
-  Meteor.subscribe('friends');
 });
 
-Template.group.onRendered(function() {
-    $('.modal').modal();
+Template.groups_section.onRendered(function() {
+    $('ul.collapsible').collapsible();
 });
 
-Template.groups.helpers({
+Template.groups_section.helpers({
   groupsList() {
     return Groups.find();
   },
@@ -105,7 +81,7 @@ Template.groups.helpers({
   }
 });
 
-Template.groups.events({
+Template.groups_section.events({
   'submit #new_group'(event) {
     event.preventDefault();
 
@@ -114,22 +90,6 @@ Template.groups.events({
 
     Meteor.call('groups.newGroup', groupName);
   },
-
-  'submit #add_group_member'(event) {
-
-  },
 });
 
-Template.group.onCreated(function () {
-  Meteor.subscribe('friends');
-});
 
-Template.group.onRendered(function() {
-    $('.modal').modal();
-});
-
-Template.group.helpers({
-  friendsList() {
-    return Friends.find();
-  }
-});
