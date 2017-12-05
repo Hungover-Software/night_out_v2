@@ -91,3 +91,5 @@ Template.groups_section.events({
     Meteor.call('groups.newGroup', groupName);
   },
 });
+
+
