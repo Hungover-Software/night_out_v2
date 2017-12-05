@@ -110,8 +110,8 @@ Template.event_new.events({
         $('#invitees li').each(function(index, value) {
             invitees.push({
                 userId: value.dataset.id,
-                username: value.dataset.email,
-                email: value.innerHTML,
+                username: value.innerHTML,
+                email: value.dataset.email,
             });
         });
         
