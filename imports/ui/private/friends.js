@@ -1,3 +1,5 @@
+import { Session } from 'meteor/session';
+
 import './friends.html';
 
 import {Friends, FriendRequests} from '../../api/friends.js';
@@ -79,9 +81,58 @@ Template.groups.events({
     Meteor.call('groups.newGroup', groupName);
   },
 
-  'submit #add_group_member'(event) {
+  'click #group_modal'(event) {
+    event.preventDefault();
+    Session.set('currentGroup', Groups.findOne({groupName: this.groupName}).friends);
+  },
+
+  'submit #add_group_members'(event) {
+    event.preventDefault();
+
+    Meteor.call('groups.updateGroupMembers', this.groupName, Session.get('currentGroup'));
+
+    $('.modal.open').modal('close')
+  },
+
+  'submit #remove_group_member'(event) {
+    event.preventDefault();
 
   },
+
+  'change #friends input'(event) {
+        const target = event.target;
+
+        let groupMembers = Session.get('currentGroup');
+
+        if (target.checked) {
+            let index = -1;
+
+            for (let i = 0; i < groupMembers.length; i++) {
+              if (groupMembers[i].userId == target.id) {
+                index = i;
+                break;
+              }
+            }
+
+            if (index === -1) {
+              groupMembers.push({userId: target.id, username: target.value, email: target.dataset.email});
+            }
+        }
+        else {
+            let index = 0;
+
+            for (let i = 0; i < groupMembers.length; i++) {
+              if (groupMembers[i].userId == target.id) {
+                index = i;
+                break;
+              }
+            }
+
+            groupMembers.splice(index, 1);
+        }
+
+        Session.set('currentGroup', groupMembers);
+    },
 });
 
 Template.group.onCreated(function () {
@@ -95,5 +146,5 @@ Template.group.onRendered(function() {
 Template.group.helpers({
   friendsList() {
     return Friends.find();
-  }
+  },
 });

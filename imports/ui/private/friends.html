@@ -61,12 +61,15 @@
 </template>
 
 <template name="group">
-  <h4>{{groupName}}</h4>
+  <h4>{{groupName}} {{groupId}}</h4>
   <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Add Friends to Group</a>
+  <a id="group_modal" class="waves-effect waves-light btn modal-trigger" href="#modal1">
+    Add Friends to Group
+  </a>
 
   <!-- Modal Structure -->
   <div id="modal1" class="modal modal-fixed-footer">
+    <form id='add_group_members'>
     <div class="modal-content">
       <h5>Friends</h5>
       <ul id="friends">
@@ -81,8 +84,10 @@
       </ul>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Add</a>
+      <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Update Group</button>
+      <!--<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Add</a>-->
     </div>
+    </form>
   </div>
   {{#each friends}}
     <p>{{friend.username}}</p>
