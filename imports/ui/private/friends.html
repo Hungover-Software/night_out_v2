@@ -1,52 +1,79 @@
 <template name="friends">
-
-    <form class="col s12" id="request">
-      <div class="input-field col s12">
-        <input type="text" name="friend_email" class="validate" />
-        <label for="friend_email" data-error="Invalid Email">Friend Email</label>
-      </div>
-      <div class="col s12">
-        <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Submit Friend Request</button>
-      </div>
-    </form>
-
-    <h3>Sent Friend Requests</h3>
-    {{#each sentFriendRequestsList}}
-      <h5>{{receiver.username}} ({{receiver.email}})</h5>
-    {{/each}}
-
-    <h3>Received Friend Requests</h3>
-    {{#each receivedFriendRequestsList}}
-      <h5>{{sender.username}} ({{sender.email}})</h5>
-      <form class="col s12" id="accept">
-        <div class="col s12">
-          <input type="submit" name="accept" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Accept" />
-        </div>
-      </form>
-      <form class="col s12" id="decline">
-        <div class="col s12">
-          <input type="submit" name="accept" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Decline" />
-        </div>
-      </form>
-    {{/each}}
-
-    <h3>Friends</h3>
-    {{#each friendsList}}
-      {{#each friends}}
-        <h5>{{friend.username}} ({{friend.email}})</h5>
-        <form class="col s12" id="unfriend">
-          <div class="col s12">
-            <input type="submit" name="unfriend" class="waves-effect waves-light btn col s12 blue-grey lighten-1" value="Unfriend" />
-          </div>
-        </form>
-      {{/each}}
-    {{/each}}
-
-    {{> groups}}
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s4"><a class="active" href="#friends_section">Friends</a></li>
+        <li class="tab col s4"><a href="#friend_requests_section">Requests</a></li>
+        <li class="tab col s4"><a href="#groups_section">Groups</a></li>
+      </ul>
+    </div>
+    <div id="friends_section" class="col s12">
+      {{> friends_section}}
+    </div>
+    <div id="friend_requests_section" class="col s12">
+      {{> friend_requests_section}}
+    </div>
+    <div id="groups_section" class="col s12">
+      {{> groups_section}}
+    </div>
+  </div>
 </template>
 
-<template name="groups">
-  <form class="col s12" id="new_group">
+<template name="friends_section">
+  <ul class="collection">
+    {{#each friendsList}}
+      {{#each friends}}
+        <li class="collection-item">
+          <div>
+            {{friend.username}} ({{friend.email}})
+            <a id="unfriend" href="#!" class="secondary-content"><i class="material-icons">close</i></a>
+          </div>
+        </li>
+      {{/each}}
+    {{/each}}
+  </ul>
+</template>
+
+<template name="friend_requests_section">
+  <form class="col s12" id="request">
+    <div class="input-field col s12">
+      <input type="text" name="friend_email" class="validate" />
+      <label for="friend_email" data-error="Invalid Email">Friend Email</label>
+    </div>
+    <div class="col s12">
+      <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Submit Friend Request</button>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col s12 m6">
+      <h4>Sent Requests</h4>
+      <ul class="collection">
+        {{#each sentFriendRequestsList}}
+          <li>
+            {{receiver.username}} ({{receiver.email}})
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="col s12 m6">
+      <h4>Recieved Requests</h4>
+      <ul class="collection">
+        {{#each receivedFriendRequestsList}}
+          <li>
+            {{sender.username}} ({{sender.email}})
+            <a id="decline" href="#!" class="secondary-content"><i class="material-icons">close</i></a>
+            <a id="accept" href="#!" class="secondary-content"><i class="material-icons">check</i></a>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</template>
+
+<template name="groups_section">
+  <div class="row">
+    <form class="col s12" id="new_group">
       <div class="input-field col s12">
         <input type="text" name="group_name" class="validate" />
         <label for="group_name">Group Name</label>
@@ -55,41 +82,27 @@
         <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Create Group</button>
       </div>
     </form>
-    {{#each groupsList}}
-      {{> group }}
-    {{/each}}
+  </div>
+  <div class="row">
+    <ul class="collapsible" data-collapsible="accordion">
+      {{#each groupsList}}
+        <li>
+          <div class="collapsible-header">{{groupName}}</div>
+          <div class="collapsible-body">
+            {{#each friends}}
+              {{username}} <br />
+            {{/each}}
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
 </template>
 
 <template name="group">
-  <h4>{{groupName}} {{groupId}}</h4>
-  <!-- Modal Trigger -->
-  <a id="group_modal" class="waves-effect waves-light btn modal-trigger" href="#modal1">
-    Add Friends to Group
-  </a>
 
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal modal-fixed-footer">
-    <form id='add_group_members'>
-    <div class="modal-content">
-      <h5>Friends</h5>
-      <ul id="friends">
-        {{#each friendsList}}
-          {{#each friends}}
-            <li>
-              <input type="checkbox" class="filled-in" id="{{friend.userId}}" value="{{friend.username}}" data-email="{{friend.email}}"/>
-              <label for="{{friend.userId}}">{{friend.username}} ({{friend.email}})</label>
-            </li>
-          {{/each}}
-        {{/each}}
-      </ul>
-    </div>
-    <div class="modal-footer">
-      <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Update Group</button>
-      <!--<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Add</a>-->
-    </div>
-    </form>
-  </div>
-  {{#each friends}}
-    <p>{{friend.username}}</p>
-  {{/each}}
+</template>
+
+<template name="modify_group">
+
 </template>
