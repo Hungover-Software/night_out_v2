@@ -94,10 +94,17 @@ var eventSchema = new SimpleSchema({
         type: String,
         label: 'Creator ID',
     },
+    creator_name: {
+        type: String,
+        label: 'Creator UserName',
+    },
+    creator_email: {
+        type: String,
+        label: 'Creator Email',
+    },
     event_name: {
         type: String,
         label: 'Event Name',
-        max: 20,
     },
     event_date: {
         type: Date,
@@ -136,6 +143,8 @@ Meteor.methods({
 
         Events.insert({
             creator_ID: this.userId,
+            creator_name: Meteor.user().username,
+            creator_email: Meteor.user().emails[0].address,
             event_name: event_name,
             event_date: event_date,
             invitees: invitees,
@@ -271,5 +280,20 @@ Meteor.methods({
         }
         
         Events.update({_id: eventId, 'categories.catId': catId}, {$set: {'categories.$.stop': stopArray}});
+    },
+    'event.updateInvitees' (eventId, invitees) {
+        // User must be logged in
+        if (! this.userId) {
+            throw new Meteor.Error('not-authorized');
+        }
+
+        // Ensure they are adding at least one person
+        if (invitees.length == 0) {
+            throw new Meteor.Error('no-invitees', 'Must have at least one friend invited');
+        }
+
+        Events.update({_id: eventId}, {$set: {invitees: invitees}});
+
+        return {success: true};
     },
 });
