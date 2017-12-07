@@ -105,7 +105,6 @@ Template.groups_section.events({
 
     Meteor.call('groups.newGroup', groupName);
   },
-
   'click #edit_group'(event) {
     event.preventDefault();
     Session.set('currentGroup', Groups.findOne({_id: this._id}).friends);
