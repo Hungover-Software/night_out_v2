@@ -6,13 +6,17 @@
     <div class="row">
       <div class="col s12">
         <div class="card-panel">
-          <h3>Invitees</h3>
+          <h3>Attendees <a id="edit-invitees" class="modal-trigger btn-floating waves-effect waves-light right" href="#friends-modal"><i class="material-icons">add</i></a></h3>
+          <p>{{creator_name}} <em class="blue-text text-lighten-3">organizer</em></p>
           {{#each invitees}}
             <p>{{username}}</p>
           {{/each}}
         </div>
       </div>
     </div>
+    
+    {{> friends_modal}}
+    
     <!--{{#each attendees}}
       <p>{{username}}</p>
     {{/each}} -->
@@ -64,7 +68,7 @@
     <!-- Modal Trigger -->
     <a class="modal-trigger comment-modal-trigger" href="#comment-modal">
       <footer class="page-footer blue-grey lighten-2">
-        <h5>Comment<i class="material-icons medium">arrow_drop_up</i></h5>
+        <div class="center">EventChat<i class="material-icons small">arrow_drop_up</i></div>
       </footer>
     </a>
 
@@ -76,7 +80,7 @@
   <!-- Modal Structure -->
   <div id="comment-modal" class="modal bottom-sheet">
     <div class="modal-content">
-      <h4>Comments</h4>
+      <h4>EventChat</h4>
       {{#each comments}}
         <p>{{username}} - {{comment}}</p>
       {{/each}}
@@ -85,9 +89,33 @@
           <input type="text-comment" name="comment" />
         </div>
         <div class="col s12">
-          <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Comment</button>
+          <button type="submit" class="waves-effect waves-light btn col s12">Comment</button>
         </div>
       </form>
+    </div>
+  </div>
+</template>
+
+<template name="friends_modal">
+  <div id="friends-modal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Friends</h4>
+      <ul id="friends">
+        {{#each friendList}}
+          {{#each friends}}
+            {{#if nequal friend.userId ../../creator_ID}}
+              <li>
+                <input type="checkbox" class="filled-in" id="{{friend.userId}}" value="{{friend.username}}" data-email="{{friend.email}}" {{isChecked friend.userId ../../invitees}}/>
+                <label for="{{friend.userId}}">{{friend.username}} ({{friend.email}})</label>
+              </li>
+            {{/if}}
+          {{/each}}
+        {{/each}}
+    </ul>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" id="invite" class="modal-action modal-close waves-effect waves-green btn-flat">Update</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
     </div>
   </div>
 </template>
