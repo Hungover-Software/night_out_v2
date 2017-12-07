@@ -1,6 +1,9 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Materialize } from 'meteor/materialize:materialize';
 
 import './signup.html';
+
+import { Toasts } from '../../components/toasts.js';
 
 Template.signup.events({
     'submit #signup'(event) {
@@ -15,10 +18,14 @@ Template.signup.events({
         const passwordConf = target.passwordConf.value;
 
         if (password != passwordConf) {
-            throw new Meteor.Error('passwords-do-not-match', 'Passwords do not match.')
+            Materialize.Toast.removeAll();
+            Toasts.error('Passwords do not match', Infinity, 'error_outline');
+            throw new Meteor.Error('passwords-do-not-match', 'Passwords do not match.');
         }
 
         if (password.length < 5) {
+            Materialize.Toast.removeAll();
+            Toasts.error('Passwords is too short', Infinity, 'error_outline');
             throw new Meteor.Error('password-too-short', 'Use a longer password.');
         }
 
@@ -29,8 +36,13 @@ Template.signup.events({
             password: password,
         },
         // On success the user is logged in and redirected to landing page
-        function() {
-            FlowRouter.go('home');
+        function(err) {
+            if (err) {
+                Materialize.Toast.removeAll();
+                Toasts.error(err.reason, Infinity, 'error_outline');
+            } else {
+                FlowRouter.go('home');
+            }
         });
     },
 });

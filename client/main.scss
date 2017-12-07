@@ -3,11 +3,23 @@
 @import '{materialize:materialize}/sass/components/color';
 
 $primary-color: color("blue-grey", "base");
-$secondary-color: color("amber", "darken-3");
+$secondary-color: color("blue", "darken-1");
 
-$link-color: color("amber", "darken-3");
+$link-color: color("blue", "darken-1");
 
 @import '{materialize:materialize}/sass/materialize';
+
+.fb-color {
+    background-color: #3b5998;
+}
+
+.btn .valign-wrapper {
+    justify-content: center;
+}
+
+.btn .fa {
+    margin-right: 15px;
+}
 
 main.container {
     margin-bottom: 100px;
@@ -22,8 +34,8 @@ main.container {
     z-index: 2;
 }
 
-.comment-modal-trigger h5 {
-    text-align: center;
+.comment-modal-trigger footer {
+    padding: 4px 0;
 }
 
 .comment-modal-trigger i {
@@ -33,4 +45,8 @@ main.container {
 #comment-modal {
     max-height: none;
     height: 80%;
+}
+
+.toast .material-icons {
+    margin-right: 10px;
 }

@@ -1,7 +1,6 @@
 <template name="login">
     <div class="row">
-        <div class="col s1 l2" style="content:''"></div>
-        <div class="col s12 m10 l8">
+        <div class="col s12 m10 l8 offset-m1 offset-l2">
             <h1 class="center">Sign In</h1>
             
             <form id="signin">
@@ -28,6 +27,21 @@
                     </div>
                 </div>
             </form>
+            <div class="row">
+                <div class="col s12 center-align">
+                    <span class="h3">- OR -</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <button id="fb-login" class="waves-effect waves-light btn col s12 fb-color">
+                        <div class="valign-wrapper">
+                            <i class="fa fa-facebook-official"></i>
+                            <span>Sign In with Facebook</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>

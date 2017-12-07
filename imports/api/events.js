@@ -94,10 +94,17 @@ var eventSchema = new SimpleSchema({
         type: String,
         label: 'Creator ID',
     },
+    creator_name: {
+        type: String,
+        label: 'Creator UserName',
+    },
+    creator_email: {
+        type: String,
+        label: 'Creator Email',
+    },
     event_name: {
         type: String,
         label: 'Event Name',
-        max: 20,
     },
     event_date: {
         type: Date,
@@ -131,11 +138,13 @@ Meteor.methods({
     'events.insert'(event_name, event_date, invitees, categories) {
 
         if (! this.userId) {
-            throw new Meteor.Error('not-authorized');
+            throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
         }
 
         Events.insert({
             creator_ID: this.userId,
+            creator_name: Meteor.user().username,
+            creator_email: Meteor.user().emails[0].address,
             event_name: event_name,
             event_date: event_date,
             invitees: invitees,
@@ -150,7 +159,7 @@ Meteor.methods({
 
         if (event.creator_ID !== this.userId) {
           // If the task is private, make sure only the owner can delete it
-          throw new Meteor.Error('not-authorized');
+          throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
         }
 
         Events.remove(eventId);
@@ -158,12 +167,12 @@ Meteor.methods({
 
     'event.comment' (eventId, message) {
         if (! this.userId) {
-            throw new Meteor.Error('not-authorized');
+            throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
         }
 
         let event = Events.findOne({_id: eventId});
         if (event == null) {
-            throw new Meteor.Error('Event with given ID doens\'t exist');
+            throw new Meteor.Error('invalid-event-error', 'Event with given ID doens\'t exist');
         }
 
         let comment = {
@@ -178,12 +187,12 @@ Meteor.methods({
     },
     'event.lock'(eventId) {
         if (! this.userId) {
-            throw new Meteor.Error('not-authorized');
+            throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
         }
 
         let event = Events.findOne({_id: eventId});
         if (event == null) {
-            throw new Meteor.Error('Event with given ID doesn\'t exist');
+            throw new Meteor.Error('invalid-event-error', 'Event with given ID doesn\'t exist');
         }
         
         Events.update({_id: eventId}, {$set: {'locked': !event.locked}});
@@ -217,16 +226,20 @@ Meteor.methods({
     },
     'event.addStop' (eventId, catId, stopName) {
         if (! this.userId) {
-            throw new Meteor.Error('not-authorized');
+            throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
         }
 
         let event = Events.findOne({_id: eventId});
         if (event == null) {
-            throw new Meteor.Error('Event with given ID doens\'t exist');
+            throw new Meteor.Error('invalid-event-error', 'Event with given ID doens\'t exist');
         }
 
         if (event.locked === true) {
-            throw new Meteor.Error('Event is locked, changes can no longer be made');
+            throw new Meteor.Error('locked-event-error', 'Event is locked, changes can no longer be made');
+        }
+        
+        if (stopName === "") {
+            throw new Meteor.Error('invalid-stop-name', 'Stop name is required');
         }
 
         let stop = {
@@ -240,12 +253,12 @@ Meteor.methods({
     },
     'event.changeVote' (eventId, catId, stopId) {
         if (! this.userId) {
-            throw new Meteor.Error('not-authorized');
+            throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
         }
         
         let event = Events.findOne({_id: eventId});
         if (event == null) {
-            throw new Meteor.Error('Event with given ID doens\'t exist');
+            throw new Meteor.Error('invalid-event-error', 'Event with given ID doens\'t exist');
         }
         
         let stopArray;
@@ -267,5 +280,20 @@ Meteor.methods({
         }
         
         Events.update({_id: eventId, 'categories.catId': catId}, {$set: {'categories.$.stop': stopArray}});
+    },
+    'event.updateInvitees' (eventId, invitees) {
+        // User must be logged in
+        if (! this.userId) {
+            throw new Meteor.Error('not-authorized');
+        }
+
+        // Ensure they are adding at least one person
+        if (invitees.length == 0) {
+            throw new Meteor.Error('no-invitees', 'Must have at least one friend invited');
+        }
+
+        Events.update({_id: eventId}, {$set: {invitees: invitees}});
+
+        return {success: true};
     },
 });

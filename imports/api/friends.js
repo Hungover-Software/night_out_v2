@@ -31,7 +31,7 @@ if (Meteor.isServer) {
 
             // User must be logged in
             if (! this.userId) {
-                throw new Meteor.Error('not-authorized');
+                throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
             }
 
             // Try to find the user the email belongs to, error if no user
@@ -79,7 +79,7 @@ if (Meteor.isServer) {
 
             // User must be logged in
             if (! this.userId) {
-                throw new Meteor.Error('not-authorized');
+                throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
             }
 
             // Grab the friend request to pull information from it later
@@ -137,7 +137,7 @@ if (Meteor.isServer) {
 
             // User must be logged in
             if (! this.userId) {
-                throw new Meteor.Error('not-authorized');
+                throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
             }
 
             FriendRequests.remove({_id: requestId});
@@ -148,14 +148,21 @@ if (Meteor.isServer) {
         'friends.unfriend'(friendId) {
             // User must be logged in
             if (! this.userId) {
-                throw new Meteor.Error('not-authorized');
+                throw new Meteor.Error('not-authorized', 'Please sign in to use this function');
             }
+            
+            let friend = Friends.findOne(
+                {userId: this.userId, "friends.friend.userId": friendId}, 
+                {"friends.$.friend.userId": friendId}
+            ).friends[0].friend;
+            
+            console.log(friend);
 
             // Remove the IDs of each person from each one's friends list
             Friends.update({userId: this.userId}, {$pull: {"friends": {'friend.userId': friendId}}});
             Friends.update({userId: friendId}, {$pull: {"friends": {'friend.userId': this.userId}}});
-
-            return {success: true};
+            
+            return {success: true, friend: friend};
         }
     });
 }
