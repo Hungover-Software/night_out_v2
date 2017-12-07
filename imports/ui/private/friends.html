@@ -22,14 +22,12 @@
 <template name="friends_section">
   <ul class="collection">
     {{#each friendsList}}
-      {{#each friends}}
-        <li class="collection-item">
-          <div>
-            {{friend.username}} ({{friend.email}})
-            <a id="unfriend" href="#!" class="secondary-content"><i class="material-icons">close</i></a>
-          </div>
-        </li>
-      {{/each}}
+      <li class="collection-item">
+        <div>
+          {{friend.username}} ({{friend.email}})
+          <a id="unfriend" href="#!" class="secondary-content"><i class="material-icons">close</i></a>
+        </div>
+      </li>
     {{/each}}
   </ul>
 </template>
@@ -41,7 +39,7 @@
       <label for="friend_email" data-error="Invalid Email">Friend Email</label>
     </div>
     <div class="col s12">
-      <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Submit Friend Request</button>
+      <button type="submit" class="waves-effect waves-light btn col s12">Submit Friend Request</button>
     </div>
   </form>
 
@@ -79,30 +77,78 @@
         <label for="group_name">Group Name</label>
       </div>
       <div class="col s12">
-        <button type="submit" class="waves-effect waves-light btn col s12 blue-grey lighten-1">Create Group</button>
+        <button type="submit" class="waves-effect waves-light btn col s12">Create Group</button>
       </div>
     </form>
   </div>
   <div class="row">
     <ul class="collapsible" data-collapsible="accordion">
       {{#each groupsList}}
-        <li>
-          <div class="collapsible-header">{{groupName}}</div>
-          <div class="collapsible-body">
-            {{#each friends}}
-              {{username}} <br />
-            {{/each}}
-          </div>
-        </li>
+        {{> group}}
       {{/each}}
     </ul>
   </div>
 </template>
 
 <template name="group">
+  <li>
+    <div class="collapsible-header">
+      <div>
+        {{groupName}}
+      </div>
+    </div>
+    <div class="collapsible-body">
+      <a href="#group_modal{{_id}}" class="edit-group modal-trigger right">
+        <i class="material-icons">edit</i>
+      </a>
 
+      {{#each sortFriends}}
+        {{username}} <br />
+      {{/each}}
+
+      <div id="group_modal{{_id}}" class="modal modal-fixed-footer">
+        <form id='update_group_members'>
+          <div class="modal-content">
+            <h5>Friends</h5>
+            <ul>
+              {{#each friendsList}}
+                <li id="friends">
+                  <input type="checkbox" class="filled-in" id="{{friend.userId}}" value="{{friend.username}}" data-email="{{friend.email}}" {{isChecked this.friend.userId}}/>
+                  <label for="{{friend.userId}}">{{friend.username}} ({{friend.email}})</label>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" id="update" class="waves-effect waves-light btn col s6">Update Group</button>
+            <button id="cancel" class="waves-effect waves-light btn col s6">Cancel</button>
+            <!--<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Add</a>-->
+          </div>
+        </form>
+      </div>
+    </div>
+  </li>
 </template>
 
 <template name="modify_group">
-
+  <div id="group_modal{{_id}}" class="modal modal-fixed-footer">
+    <form id='update_group_members'>
+    <div class="modal-content">
+      <h5>Friends</h5>
+      <ul>
+        {{#each friendsList}}
+          <li>
+            <input type="checkbox" class="filled-in" id="{{friend.userId}}" value="{{friend.username}}" data-email="{{friend.email}}" {{isChecked this.friend.userId}}/>
+            <label for="{{friend.userId}}">{{friend.username}} ({{friend.email}})</label>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" id="update" class="waves-effect waves-light btn col s6">Update Group</button>
+      <button id="cancel" class="waves-effect waves-light btn col s6">Cancel</button>
+      <!--<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Add</a>-->
+    </div>
+    </form>
+  </div>
 </template>
